@@ -51,8 +51,8 @@ export default {
     theme: {
       themes: {
         light: {
-          primary: process.env.PRIMARY_COLOR,
-          secondary: process.env.SECONDARY_COLOR,
+          // primary: process.env.PRIMARY_COLOR,
+          // secondary: process.env.SECONDARY_COLOR,
         },
       },
     },
