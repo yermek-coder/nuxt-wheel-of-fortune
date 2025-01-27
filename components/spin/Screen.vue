@@ -3,8 +3,9 @@
         <v-row justify="center">
             <v-col cols="11">
                 <div class="spin-screen-content">
-                    <SpinHeader>24,384,585</SpinHeader>
-                    <SpinWheel :sections="sections" />
+                    <SpinHeader>{{ formatCoinsCount(settings.coinsCount) }}</SpinHeader>
+                    <SpinWheel :sections="settings.sections" :multiplier="settings.multiplier"
+                        :spinsAvailable="settings.spinsAvailable" />
                     <div class="spin-screen-content-button-bottom">
                         <ArrowDown />
                     </div>
@@ -19,19 +20,12 @@ import ArrowDown from "~/static/icons/arrow-down.svg?inline"
 
 export default {
     components: { ArrowDown },
-    data() {
-        return {
-            sections: [
-                { color: '#FE0E73', amount: 200, type: "coins", probability: 50, icon: "/icons/coin.svg" },
-                { color: '#7815FC', amount: 300, type: "coins", probability: 50, icon: "/icons/coin.svg" },
-                { color: '#FE0E73', amount: 400, type: "coins", probability: 50, icon: "/icons/coin.svg" },
-                { color: '#7815FC', amount: 500, type: "coins", probability: 0, icon: "/icons/coin.svg" },
-                { color: '#FE0E73', amount: 600, type: "coins", probability: 0, icon: "/icons/coin.svg" },
-                { color: '#7815FC', amount: 700, type: "coins", probability: 0, icon: "/icons/coin.svg" },
-                { color: '#FE0E73', amount: 800, type: "coins", probability: 0, icon: "/icons/coin.svg" },
-                { color: '#7815FC', amount: 1000, type: "coins", probability: 0, icon: "/icons/coin.svg" },
-            ],
-        };
-    },
+    props: ["settings"],
+    methods: {
+        formatCoinsCount(num) {
+            num = typeof num === 'number' ? num : parseInt(num);
+            return num.toLocaleString()
+        }
+    }
 }
 </script>

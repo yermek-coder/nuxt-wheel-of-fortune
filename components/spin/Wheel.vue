@@ -12,7 +12,7 @@
                     <div v-for="(section, index) in sections" :key="index" class="section-label"
                         :style="calculateLabelPosition(index)">
                         <span class="section-text urbanist-bold urbanist-white-shadow">x{{ section.amount }}</span>
-                        <img :src="section.icon" class="section-icon" />
+                        <img :src="getIcon(section)" class="section-icon" />
                     </div>
                 </div>
             </div>
@@ -23,10 +23,10 @@
                 <Knob />
             </div>
         </div>
-        <div class="multiplier urbanist-bold urbanist-white-shadow">x1</div>
-        <div class="spins-left urbanist-extra-bold">1 Spin Left</div>
+        <div class="multiplier urbanist-bold urbanist-white-shadow">x{{ multiplier }}</div>
+        <div class="spins-left urbanist-extra-bold">{{ spinsLeftText }}</div>
 
-        <button @click="spinWheel" class="spin-button urbanist-black">
+        <button @click="spinWheel" :disabled="!canSpin" class="spin-button urbanist-black">
             Spin Now
         </button>
     </div>
@@ -38,7 +38,6 @@ import Pointer from "~/static/decorations/pointer.svg?inline"
 
 export default {
     components: { Knob, Pointer },
-    name: 'WheelOfFortune',
     props: {
         size: {
             type: Number,
@@ -48,6 +47,8 @@ export default {
             type: Array,
             required: true,
         },
+        multiplier: Number,
+        spinsAvailable: Number
     },
     data() {
         return {
@@ -56,7 +57,22 @@ export default {
             ctx: null,
             isSpinning: false,
             spinTransition: '',
+            spinsLeft: this.spinsAvailable
         };
+    },
+    computed: {
+        canSpin() {
+            return this.spinsLeft && !this.isSpinning
+        },
+        spinsLeftText() {
+            if (this.spinsLeft === 1) {
+                return `${this.spinsLeft} Spin Left`
+            } else if (this.spinsLeft === 0) {
+                return "No Spins Left"
+            } else {
+                return `${this.spinsLeft} Spins Left`
+            }
+        }
     },
     mounted() {
         this.ctx = this.$refs.wheelCanvas.getContext('2d');
@@ -89,7 +105,7 @@ export default {
 
             ctx.clearRect(0, 0, size, size);
 
-            sections.forEach((section, index) => {
+            sections.forEach(section => {
                 const endAngle = startAngle + sliceAngle;
 
                 ctx.beginPath();
@@ -127,6 +143,7 @@ export default {
             const targetRotation = this.lastRotation + fullRotations + angleDiff - randomOffset;
 
             this.isSpinning = true;
+            this.spinsLeft -= 1;
             this.spinTransition = 'transform 5s cubic-bezier(0.25, 0.1, 0.25, 1)';
             this.currentRotation = targetRotation;
 
@@ -134,9 +151,16 @@ export default {
                 this.isSpinning = false;
                 this.spinTransition = '';
                 this.lastRotation = targetRotation;
-                document.dispatchEvent(new CustomEvent("reward-collected", { detail: sections[selectedIndex] }))
+                this.showRewardDialog(sections[selectedIndex])
             }, 5000);
         },
+        getIcon(section) {
+            return section.type === "coins" ? "/icons/coin.svg" : "/icons/gem.svg"
+        },
+        showRewardDialog(section) {
+            const multipliedSection = { ...section, amount: section.amount * this.multiplier }
+            document.dispatchEvent(new CustomEvent("reward-collected", { detail: multipliedSection }))
+        }
     },
 };
 </script>

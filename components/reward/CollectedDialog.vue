@@ -1,22 +1,21 @@
 <template>
-    <!-- <transition name="anim-modal-content"> -->
-    <div @click="visible = false" class="reward-collected-dialog">
-        <div :class="{ hidden: !visible }" class="reward-collected-dialog-backdrop"></div>
-        <canvas ref="canvas" :class="{ hidden: !visible }" class="reward-collected-dialog-canvas" />
-        <div :class="{ hidden: !visible }" class="reward-collected-dialog-wrapper">
-            <div class="reward-collected-dialog-body">
-                <div class="reward-collected-dialog-card-reward-type urbanist-black">
-                    {{ type.toUpperCase() }}
+    <transition name="anim-modal-content">
+        <div @click="visible = false" class="reward-collected-dialog">
+            <div :class="{ hidden: !visible }" class="reward-collected-dialog-backdrop"></div>
+            <div :class="{ hidden: !visible }" class="reward-collected-dialog-wrapper">
+                <div class="reward-collected-dialog-body">
+                    <div class="reward-collected-dialog-card-reward-type urbanist-black">
+                        {{ type.toUpperCase() }}
+                    </div>
+                    <div class="reward-collected-dialog-card">
+                        <CoinStack class="reward-collected-dialog-card-icon" />
+                        <div class="reward-collected-dialog-card-info urbanist-bold">x{{ amount }}</div>
+                    </div>
                 </div>
-                <div class="reward-collected-dialog-card">
-                    <CoinStack class="reward-collected-dialog-card-icon" />
-                    <div class="reward-collected-dialog-card-info urbanist-bold">x{{ amount }}</div>
-                </div>
+                <div class="reward-collected-dialog-message urbanist-extra-bold">Congratulations</div>
             </div>
-            <div class="reward-collected-dialog-message urbanist-extra-bold">Congratulations</div>
         </div>
-    </div>
-    <!-- </transition> -->
+    </transition>
 </template>
 
 <script>
@@ -38,13 +37,12 @@ export default {
             if (value) {
                 this.startConfetti()
             } else {
-                this.confetti.reset()
+                confetti.reset()
             }
         }
     },
     mounted() {
         document.addEventListener("reward-collected", this.onEvent);
-        this.confetti = this.confetti || confetti.create(this.$refs.canvas, { resize: true, useWorker: true });
     },
     unmounted() {
         document.removeEventListener("reward-collected", this.onEvent)
@@ -57,11 +55,13 @@ export default {
                 this.amount = event.detail.amount;
             }
         },
-        startConfetti() {
-            this.confetti({
-                particleCount: 20,
-                spread: 70,
-                origin: { y: 0.6 }
+        async startConfetti() {
+            confetti({
+                particleCount: 50,
+                spread: 90,
+                origin: { y: 0.5, x: 0.5 },
+                startVelocity: 35,
+                colors: ["#A267FF", "#1BBE6C", "#05BBDD", "#367BF2", "#FBD44D"]
             });
         }
     }
