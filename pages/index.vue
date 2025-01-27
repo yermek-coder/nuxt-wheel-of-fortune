@@ -1,0 +1,3 @@
+<template>
+  <RewardScreen />
+</template>
