@@ -12,6 +12,7 @@
     "lintfix": "prettier --write --list-different ."
   },
   "dependencies": {
+    "canvas-confetti": "^1.9.3",
     "confetti-cannon": "^2.2.2",
     "core-js": "^3.25.3",
     "gsap": "^3.12.7",

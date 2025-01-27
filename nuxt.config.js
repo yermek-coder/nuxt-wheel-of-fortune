@@ -20,7 +20,7 @@ export default {
     { rel: 'preconnect', crossorigin: true, href: 'https://fonts.gstatic.com' },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@100..900&display=swap' }
     ],
-    script: [{ src: "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" }]
+    // script: [{ src: "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" }]
   },
 
   css: [

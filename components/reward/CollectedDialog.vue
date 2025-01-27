@@ -21,6 +21,7 @@
 
 <script>
 import CoinStack from "~/static/icons/coin-stack.svg?inline";
+import confetti from "canvas-confetti";
 
 export default {
     components: { CoinStack },
@@ -29,7 +30,7 @@ export default {
             visible: false,
             type: "coins",
             amount: 0,
-            confettiInstance: null
+            confetti: null
         }
     },
     watch: {
@@ -43,7 +44,7 @@ export default {
     },
     mounted() {
         document.addEventListener("reward-collected", this.onEvent);
-        this.confetti = this.confetti || window.confetti.create(this.$refs.canvas, { resize: true, useWorker: true });
+        this.confetti = this.confetti || confetti.create(this.$refs.canvas, { resize: true, useWorker: true });
     },
     unmounted() {
         document.removeEventListener("reward-collected", this.onEvent)
