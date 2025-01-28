@@ -1,14 +1,3 @@
-/* COLLECTED */
-.anim-modal-content-enter-active,
-.anim-modal-content-leave-active {
-    transition: all 0.25s linear;
-}
-
-.anim-modal-content-enter,
-.anim-modal-content-leave-to {
-    opacity: 0;
-}
-
 .reward-collected-dialog-wrapper {
     height: 100vh;
     width: 100vw;
@@ -94,4 +83,45 @@
 
 .reward-collected-dialog .hidden {
     z-index: -1;
+}
+
+@keyframes scaleUp {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.reward-collected-dialog-wrapper.about-to-show {
+    animation: scaleUp .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+}
+
+.reward-collected-dialog-wrapper.about-to-hide {
+    opacity: 0;
+    transform: scale(0);
+    animation: scaleUp .25s cubic-bezier(0.165, 0.840, 0.440, 1.000) reverse;
+}
+
+.reward-collected-dialog-backdrop.about-to-show {
+    animation: fadeUp .5s ease-in-out forwards;
+}
+
+.reward-collected-dialog-backdrop.about-to-hide {
+    opacity: 0;
+    animation: fadeUp .5s ease-in-out reverse;
 }

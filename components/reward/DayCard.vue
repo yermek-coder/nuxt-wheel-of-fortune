@@ -1,5 +1,5 @@
 <template>
-    <a class="reward-day-card" :class="{ active }">
+    <a @click="$emit('click')" class="reward-day-card" :class="{ active, passive }">
         <span class="reward-day-card-title urbanist-extra-bold urbanist-shadow">{{ title }}</span>
         <span class="reward-day-card-body">
             <slot />
@@ -22,7 +22,8 @@ export default {
         title: String,
         active: Boolean,
         checked: Boolean,
-        info: String
+        passive: Boolean,
+        info: String,
     }
 }
 </script>

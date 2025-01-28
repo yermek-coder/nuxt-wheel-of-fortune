@@ -8,15 +8,18 @@
         </v-row>
 
         <v-form @submit.prevent="submit">
-            <!-- Total Coins and Multiplier -->
+            <!-- Total Coins -->
             <v-row>
                 <v-col cols="12" md="6">
                     <v-text-field v-model.number="coinsCount" label="Total Coins" type="number" min="0"
                         required></v-text-field>
                 </v-col>
+            </v-row>
+
+            <!-- Winner Section Color -->
+            <v-row>
                 <v-col cols="12" md="6">
-                    <v-text-field v-model.number="multiplier" label="Multiplier" type="number" min="1"
-                        required></v-text-field>
+                    <v-text-field v-model.number="winnerColor" label="Winner Section Color"></v-text-field>
                 </v-col>
             </v-row>
 
@@ -78,23 +81,21 @@ export default {
     data() {
         return {
             coinsCount: 0,
-            multiplier: 1,
             spinsAvailable: 2,
-            numberOfSections: 3, // Default number of sections
+            numberOfSections: 3,
             sections: [],
+            winnerColor: "#2FFFFF",
         };
     },
     created() {
-        this.updateSections(); // Initialize sections based on default number
+        this.updateSections();
     },
     methods: {
-        // Update sections based on the number of sections input
         updateSections() {
             const currentLength = this.sections.length;
             const newLength = this.numberOfSections;
 
             if (newLength > currentLength) {
-                // Add new sections
                 for (let i = currentLength; i < newLength; i++) {
                     this.sections.push({
                         probability: 0,
@@ -104,11 +105,9 @@ export default {
                     });
                 }
             } else if (newLength < currentLength) {
-                // Remove extra sections
                 this.sections.splice(newLength);
             }
         },
-        // Add a new section
         addSection() {
             this.sections.push({
                 probability: 0,
@@ -116,16 +115,13 @@ export default {
                 amount: 0,
                 type: 'coins',
             });
-            this.numberOfSections = this.sections.length; // Sync with input
+            this.numberOfSections = this.sections.length;
         },
-        // Remove a section by index
         removeSection(index) {
             this.sections.splice(index, 1);
-            this.numberOfSections = this.sections.length; // Sync with input
+            this.numberOfSections = this.sections.length;
         },
-        // Save wheel settings
         submit() {
-            // Validate probabilities sum to 100
             const totalProbability = this.sections.reduce((sum, section) => sum + section.probability, 0);
             if (totalProbability <= 0) {
                 alert('Total probability must more that 0');
@@ -134,18 +130,13 @@ export default {
 
             const settings = {
                 coinsCount: this.coinsCount,
-                multiplier: this.multiplier,
                 sections: this.sections,
+                winnerColor: this.winnerColor
             }
-            // Save settings logic here
-            console.log('Wheel Settings:', settings);
 
+            console.log('Wheel Settings:', settings);
             navigator.clipboard.writeText(JSON.stringify(settings, undefined, 2))
         },
     },
 };
 </script>
-
-<style scoped>
-/* Add any custom styles here */
-</style>

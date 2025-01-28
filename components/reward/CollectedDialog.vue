@@ -1,26 +1,26 @@
 <template>
-    <transition name="anim-modal-content">
-        <div @click="visible = false" class="reward-collected-dialog">
-            <div :class="{ hidden: !visible }" class="reward-collected-dialog-backdrop"></div>
-            <div :class="{ hidden: !visible }" class="reward-collected-dialog-wrapper">
-                <div class="reward-collected-dialog-body">
-                    <div class="reward-collected-dialog-card-reward-type urbanist-black">
-                        {{ type.toUpperCase() }}
-                    </div>
-                    <div class="reward-collected-dialog-card">
-                        <CoinStack class="reward-collected-dialog-card-icon" />
-                        <div class="reward-collected-dialog-card-info urbanist-bold">x{{ amount }}</div>
-                    </div>
+    <div @click="hide" class="reward-collected-dialog">
+        <div :class="[{ hidden: !visible }, animationClasses]" class="reward-collected-dialog-backdrop"></div>
+        <div :class="[{ hidden: !visible }, animationClasses]" class="reward-collected-dialog-wrapper">
+            <div class="reward-collected-dialog-body">
+                <div class="reward-collected-dialog-card-reward-type urbanist-black">
+                    {{ type.toUpperCase() }}
                 </div>
-                <div class="reward-collected-dialog-message urbanist-extra-bold">Congratulations</div>
+                <div class="reward-collected-dialog-card">
+                    <CoinStack class="reward-collected-dialog-card-icon" />
+                    <div class="reward-collected-dialog-card-info urbanist-bold">x{{ amount }}</div>
+                </div>
             </div>
+            <div class="reward-collected-dialog-message urbanist-extra-bold">Congratulations</div>
         </div>
-    </transition>
+    </div>
 </template>
 
 <script>
 import CoinStack from "~/static/icons/coin-stack.svg?inline";
 import confetti from "canvas-confetti";
+
+const ANIM_DURATION = 500;
 
 export default {
     components: { CoinStack },
@@ -29,15 +29,16 @@ export default {
             visible: false,
             type: "coins",
             amount: 0,
-            confetti: null
+            confetti: null,
+            aboutToShow: false,
+            aboutToHide: false,
         }
     },
-    watch: {
-        visible(value) {
-            if (value) {
-                this.startConfetti()
-            } else {
-                confetti.reset()
+    computed: {
+        animationClasses() {
+            return {
+                'about-to-show': this.aboutToShow,
+                'about-to-hide': this.aboutToHide
             }
         }
     },
@@ -50,12 +51,13 @@ export default {
     methods: {
         onEvent(event) {
             if (event.detail) {
-                this.visible = true;
+                this.show()
                 this.type = event.detail.type;
                 this.amount = event.detail.amount;
             }
         },
         async startConfetti() {
+            await this.$nextTick()
             confetti({
                 particleCount: 50,
                 spread: 90,
@@ -63,6 +65,23 @@ export default {
                 startVelocity: 35,
                 colors: ["#A267FF", "#1BBE6C", "#05BBDD", "#367BF2", "#FBD44D"]
             });
+        },
+        show() {
+            this.visible = true;
+            this.aboutToShow = true;
+            setTimeout(() => {
+                this.aboutToShow = false;
+                this.startConfetti();
+            }, ANIM_DURATION);
+        },
+        hide() {
+            this.aboutToHide = true;
+            setTimeout(() => {
+                this.aboutToHide = false;
+                this.visible = false;
+                confetti.reset();
+            }, ANIM_DURATION / 2);
+
         }
     }
 }

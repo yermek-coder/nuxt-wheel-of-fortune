@@ -5,15 +5,17 @@
                 <div class="reward-screen-content">
                     <RewardTitle>Daily Bonus</RewardTitle>
                     <div class="reward-screen-content-text-gold urbanist-semi-bold">Come back tomorrow for more! </div>
-                    <RewardSteps :value="1" />
+                    <RewardSteps :value="config.achievementStep" />
                     <div class="reward-progress-card">
-                        <RewardProgress :value="12" :range="[0, 30]" :steps="progressSteps" />
+                        <RewardProgress :value="config.progress.current" :range="config.progress.range"
+                            :steps="config.progress.steps" />
                     </div>
                     <v-container class="reward-progress-grid">
                         <v-row>
-                            <v-col @click="collectReward(item)" v-for="(item, idx) in rewards" :key="idx" cols="4">
-                                <RewardDayCard :title="`Day ${idx + 1}`" :info="item.amount && `x${item.amount}`"
-                                    :active="item.active" :checked="item.collected">
+                            <v-col v-for="(item, idx) in config.rewards.slice(0, -1)" :key="idx" cols="4">
+                                <RewardDayCard @click="collectReward(item)" :title="`Day ${idx + 1}`"
+                                    :info="item.amount && `x${item.amount}`" :active="isToday(item.date)"
+                                    :passive="inFuture(item.date)" :checked="item.collected">
                                     <RewardDayCardIcon :type="item.type" />
                                 </RewardDayCard>
                             </v-col>
@@ -28,9 +30,10 @@
                     </v-container>
                     <v-container class="reward-progress-grid">
                         <v-row justify="center">
-                            <v-col v-for="(item, idx) in lastDayRewards" :key="idx" cols="4">
-                                <RewardDayCard :info="item.amount && `x${item.amount}`">
-                                    <RewardDayCardIcon :type="item.type" />
+                            <v-col cols="4">
+                                <RewardDayCard :info="`x${lastDayReward.amount}`" :active="isToday(lastDayReward.date)"
+                                    :passive="inFuture(lastDayReward.date)" :checked="lastDayReward.collected">
+                                    <RewardDayCardIcon :type="lastDayReward.type" />
                                 </RewardDayCard>
                             </v-col>
                         </v-row>
@@ -45,67 +48,65 @@
 </template>
 
 <script>
+const MINUTE = 1000 * 60;
+const DAY = MINUTE * 60 * 24;
+
+function getDateId(date) {
+    return date ? Math.floor(new Date(date).getTime() / DAY) : 0;
+}
+
 export default {
+    props: {
+        config: Object,
+    },
     data() {
         return {
-            progressSteps: [
-                {
-                    value: 0,
-                    title: "1",
-                },
-                {
-                    value: 8,
-                    title: "8",
-                    icon: "chest-wood"
-                },
-                {
-                    value: 15,
-                    title: "15",
-                    icon: "chest-blue"
-                },
-                {
-                    value: 22,
-                    title: "22",
-                    icon: "chest-purple"
-                },
-                {
-                    value: 30,
-                    title: "30",
-                    icon: "chest-gold"
-                }
-            ],
-            rewards: [
-                { type: "coins", amount: 25, collected: true },
-                { type: "coins", amount: 50, collected: true },
-                { type: "coins", amount: 100, collected: true },
-                { type: "coins", amount: 200, active: true },
-                { type: "coins", amount: 300 },
-                { type: "coins", amount: 500 },
-            ],
-            lastDayRewards: [{ type: "coins" }, { type: "gems" },],
-            nextRewardDate: new Date(new Date().getTime() + 1000 * 60 * 60 * 12),
             interval: null,
-            timerDate: "11:11:11",
+            timerDate: "00 : 00 : 00"
+        }
+    },
+    computed: {
+        lastDayReward() {
+            return this.config.rewards[this.config.rewards.length - 1]
+        },
+        nextRewardDate() {
+            const todayRewardIdx = this.config.rewards.findIndex(reward => this.isToday(reward.date))
+            if (todayRewardIdx >= 0 && this.config.rewards[todayRewardIdx + 1]) {
+                return new Date(this.config.rewards[todayRewardIdx + 1].date)
+            }
         }
     },
     mounted() {
         this.interval = setInterval(this.timer, 1000)
     },
-    unmounted() {
+    beforeDestroy() {
         clearInterval(this.interval);
         this.interval = null;
     },
     methods: {
         timer() {
-            const now = new Date();
-            const diffMs = this.nextRewardDate - now;
-            const hours = Math.floor(diffMs / (1000 * 60 * 60));
-            const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
-            this.timerDate = [hours, minutes, seconds].map(num => num.toString().padStart(2, "0")).join(":")
+            if (this.nextRewardDate) {
+                const now = new Date();
+                const diffMs = this.nextRewardDate - now;
+                const hours = Math.floor(diffMs / (1000 * 60 * 60));
+                const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+                this.timerDate = [hours, minutes, seconds].map(num => num.toString().padStart(2, "0")).join(" : ")
+            } else {
+                this.timerDate = "00 : 00 : 00"
+            }
         },
-        collectReward(event) {
-            document.dispatchEvent(new CustomEvent("reward-collected", { detail: event }))
+        collectReward(reward) {
+            if (!reward.collected) {
+                document.dispatchEvent(new CustomEvent("reward-collected", { detail: reward }))
+                this.$emit("reward", reward)
+            }
+        },
+        isToday(date) {
+            return getDateId(date) === getDateId(new Date())
+        },
+        inFuture(date) {
+            return getDateId(date) > getDateId(new Date())
         }
     }
 }

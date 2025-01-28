@@ -19,7 +19,8 @@ export default {
                 ],
                 coinsCount: 24384585,
                 multiplier: 1,
-                spinsAvailable: 2,
+                spinsAvailable: 3,
+                winnerColor: "#2FFFFF"
             }
         };
     },

@@ -1,7 +1,7 @@
 <template>
     <div class="wheel-root">
         <div class="wheel-container">
-            <div ref="wheelWrapper" class="wheel-wrapper" :class="{ 'spinning': isSpinning }" :style="{
+            <div class="wheel-wrapper" :class="{ 'spinning': isSpinning }" :style="{
                 transform: `rotate(${currentRotation}deg)`,
                 transition: spinTransition
             }">
@@ -23,9 +23,8 @@
                 <Knob />
             </div>
         </div>
-        <div class="multiplier urbanist-bold urbanist-white-shadow">x{{ multiplier }}</div>
+        <div class="multiplier urbanist-bold urbanist-white-shadow">x{{ spinsLeft }}</div>
         <div class="spins-left urbanist-extra-bold">{{ spinsLeftText }}</div>
-
         <button @click="spinWheel" :disabled="!canSpin" class="spin-button urbanist-black">
             Spin Now
         </button>
@@ -47,8 +46,11 @@ export default {
             type: Array,
             required: true,
         },
-        multiplier: Number,
-        spinsAvailable: Number
+        spinsAvailable: Number,
+        winnerColor: {
+            type: String,
+            default: '#2FFFFF'
+        }
     },
     data() {
         return {
@@ -57,7 +59,8 @@ export default {
             ctx: null,
             isSpinning: false,
             spinTransition: '',
-            spinsLeft: this.spinsAvailable
+            spinsLeft: this.spinsAvailable,
+            winningIndex: null
         };
     },
     computed: {
@@ -105,13 +108,15 @@ export default {
 
             ctx.clearRect(0, 0, size, size);
 
-            sections.forEach(section => {
+            sections.forEach((section, index) => {
                 const endAngle = startAngle + sliceAngle;
 
                 ctx.beginPath();
                 ctx.moveTo(center, center);
                 ctx.arc(center, center, radius, startAngle, endAngle);
-                ctx.fillStyle = section.color;
+
+                // Use winnerColor for winning section, original color otherwise
+                ctx.fillStyle = (index === this.winningIndex) ? this.winnerColor : section.color;
                 ctx.fill();
 
                 startAngle = endAngle;
@@ -132,14 +137,17 @@ export default {
                 }
             }
 
+            // Reset previous winning section
+            this.winningIndex = null;
+            this.drawWheel();
+
             const sliceAngle = 360 / sections.length;
-            const destinationAngle = -(selectedIndex * sliceAngle); // Negative for correct alignment
+            const destinationAngle = -(selectedIndex * sliceAngle);
             const fullRotations = 360 * 5;
 
-            // Calculate the shortest path to the winning position
             const currentAngle = this.lastRotation % 360;
             const angleDiff = ((destinationAngle - currentAngle + 540) % 360) - 180;
-            const randomOffset = Math.random() * sliceAngle;
+            const randomOffset = Math.random() * (sliceAngle * 0.8);
             const targetRotation = this.lastRotation + fullRotations + angleDiff - randomOffset;
 
             this.isSpinning = true;
@@ -151,15 +159,20 @@ export default {
                 this.isSpinning = false;
                 this.spinTransition = '';
                 this.lastRotation = targetRotation;
-                this.showRewardDialog(sections[selectedIndex])
+
+                // Set winning section and redraw wheel
+                this.winningIndex = selectedIndex;
+                this.drawWheel();
+
+                this.showRewardDialog(sections[selectedIndex]);
             }, 5000);
         },
         getIcon(section) {
             return section.type === "coins" ? "/icons/coin.svg" : "/icons/gem.svg"
         },
         showRewardDialog(section) {
-            const multipliedSection = { ...section, amount: section.amount * this.multiplier }
-            document.dispatchEvent(new CustomEvent("reward-collected", { detail: multipliedSection }))
+            document.dispatchEvent(new CustomEvent("reward-collected", { detail: section }))
+            this.$emit("win", section)
         }
     },
 };

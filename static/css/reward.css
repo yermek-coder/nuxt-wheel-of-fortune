@@ -206,10 +206,14 @@
     border: 1px solid #43270F;
 }
 
-.reward-day-card:active,
-.reward-day-card:focus {
+.reward-day-card.active {
     background: url("/decorations/day-card-bg-active.svg") no-repeat center / cover;
     box-shadow: 0 0 20px #0095FF, 0 0 5px #FFFFFF, 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.reward-day-card.passive {
+    filter: brightness(0.7);
+    pointer-events: none;
 }
 
 .reward-day-card-title {
@@ -236,7 +240,7 @@
 .reward-day-card-info {
     position: absolute;
     right: 0.48rem;
-    bottom: 0.48rem;
+    bottom: 0.3rem;
 }
 
 .reward-day-card-info-text {
