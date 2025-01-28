@@ -4,8 +4,8 @@
             <v-col cols="11">
                 <div class="spin-screen-content">
                     <SpinHeader>{{ formatCoinsCount(settings.coinsCount) }}</SpinHeader>
-                    <SpinWheel :sections="settings.sections" :multiplier="settings.multiplier"
-                        :spinsAvailable="settings.spinsAvailable" />
+                    <SpinWheel @win="$emit('win', $event)" :sections="settings.sections"
+                        :multiplier="settings.multiplier" :spinsAvailable="settings.spinsAvailable" />
                     <div class="spin-screen-content-button-bottom">
                         <ArrowDown />
                     </div>

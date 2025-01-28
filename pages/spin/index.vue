@@ -18,7 +18,6 @@ export default {
                     { color: '#7815FC', amount: 1000, type: "coins", probability: 10 },
                 ],
                 coinsCount: 24384585,
-                multiplier: 1,
                 spinsAvailable: 3,
                 winnerColor: "#2FFFFF"
             }
