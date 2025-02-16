@@ -1,9 +1,10 @@
 <template>
   <v-app dark>
     <v-main>
-      <Nuxt />
+      <Nuxt class="default-layout" />
+      <LayoutBottomNavigation />
     </v-main>
-    <RewardCollectedDialog />
+    <Modals />
   </v-app>
 </template>
 

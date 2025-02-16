@@ -3,7 +3,7 @@
         <span class="reward-progress-meter" :style="{ width: progress + '%' }"></span>
         <RewardBadge v-for="item in steps" :key="item.value" class="reward-progress-step"
             :style="{ left: getProgress(item.value) + '%' }">
-            <Check v-if="progress >= getProgress(item.value)" />
+            <Icon icon="check" v-if="progress >= getProgress(item.value)" />
             <span v-else class="reward-progress-step-title urbanist-shadow urbanist-extra-bold">
                 {{ item.title }}
             </span>
@@ -14,10 +14,7 @@
 </template>
 
 <script>
-import Check from "~/static/icons/check.svg?inline"
-
 export default {
-    components: { Check },
     props: {
         value: Number,
         range: Array,

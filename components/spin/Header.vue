@@ -1,21 +1,13 @@
 <template>
     <div class="spin-header-wrapper">
         <div class="spin-header">
-            <Coin class="spin-header-icon" />
+            <Icon icon="coin" class="spin-header-icon" />
             <span class="spin-header-info urbanist-white-shadow urbanist-bold">
                 <slot />
             </span>
         </div>
     </div>
 </template>
-
-<script>
-import Coin from "~/static/icons/coin.svg?inline"
-
-export default {
-    components: { Coin }
-}
-</script>
 
 <style>
 .spin {

@@ -7,7 +7,7 @@
                     {{ type.toUpperCase() }}
                 </div>
                 <div class="reward-collected-dialog-card">
-                    <CoinStack class="reward-collected-dialog-card-icon" />
+                    <Icon icon="coin-stack" class="reward-collected-dialog-card-icon" />
                     <div class="reward-collected-dialog-card-info urbanist-bold">x{{ amount }}</div>
                 </div>
             </div>
@@ -17,13 +17,11 @@
 </template>
 
 <script>
-import CoinStack from "~/static/icons/coin-stack.svg?inline";
 import confetti from "canvas-confetti";
 
 const ANIM_DURATION = 500;
 
 export default {
-    components: { CoinStack },
     data() {
         return {
             visible: false,

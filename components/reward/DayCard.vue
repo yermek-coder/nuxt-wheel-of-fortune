@@ -6,7 +6,7 @@
         </span>
         <span class="reward-day-card-info">
             <RewardBadge v-if="checked">
-                <Check />
+                <Icon icon="check" />
             </RewardBadge>
             <span v-else class="urbanist-bold reward-day-card-info-text urbanist-white-shadow">{{ info }}</span>
         </span>
@@ -14,10 +14,7 @@
 </template>
 
 <script>
-import Check from "~/static/icons/check.svg?inline"
-
 export default {
-    components: { Check },
     props: {
         title: String,
         active: Boolean,

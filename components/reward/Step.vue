@@ -1,14 +1,10 @@
 <template>
-    <StepIconActive v-if="value" />
-    <StepIconPassive v-else />
+    <Icon icon="gem-step-active" v-if="value" />
+    <Icon icon="gem-step-passive" v-else />
 </template>
 
 <script>
-import StepIconPassive from "~/static/icons/gem-step-passive.svg?inline"
-import StepIconActive from "~/static/icons/gem-step-active.svg?inline"
-
 export default {
-    components: { StepIconPassive, StepIconActive },
     props: ["value"]
 }
 </script>

@@ -7,7 +7,7 @@
                     <SpinWheel @win="$emit('win', $event)" :sections="settings.sections"
                         :multiplier="settings.multiplier" :spinsAvailable="settings.spinsAvailable" />
                     <div class="spin-screen-content-button-bottom">
-                        <ArrowDown />
+                        <Icon icon="arrow-down" />
                     </div>
                 </div>
             </v-col>
@@ -16,10 +16,7 @@
 </template>
 
 <script>
-import ArrowDown from "~/static/icons/arrow-down.svg?inline"
-
 export default {
-    components: { ArrowDown },
     props: ["settings"],
     methods: {
         formatCoinsCount(num) {

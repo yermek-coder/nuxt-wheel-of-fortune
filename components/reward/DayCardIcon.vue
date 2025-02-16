@@ -1,13 +1,10 @@
 <template>
-    <CoinStack v-if="type === 'coins'" />
+    <Icon v-if="type === 'coins'" icon="coin-stack" />
     <IconGem v-else color="#7600CD" />
 </template>
 
 <script>
-import CoinStack from "~/static/icons/coin-stack.svg?inline"
-
 export default {
-    components: { CoinStack },
     props: ["type"]
 }
 </script>

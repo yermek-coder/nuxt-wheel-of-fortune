@@ -31,8 +31,9 @@
                     <v-container class="reward-progress-grid">
                         <v-row justify="center">
                             <v-col cols="4">
-                                <RewardDayCard :info="`x${lastDayReward.amount}`" :active="isToday(lastDayReward.date)"
-                                    :passive="inFuture(lastDayReward.date)" :checked="lastDayReward.collected">
+                                <RewardDayCard @click="collectReward(lastDayReward)" :info="`x${lastDayReward.amount}`"
+                                    :active="isToday(lastDayReward.date)" :passive="inFuture(lastDayReward.date)"
+                                    :checked="lastDayReward.collected">
                                     <RewardDayCardIcon :type="lastDayReward.type" />
                                 </RewardDayCard>
                             </v-col>

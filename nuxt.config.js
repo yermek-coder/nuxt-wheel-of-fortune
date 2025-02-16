@@ -18,22 +18,32 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     { rel: 'preconnect', crossorigin: true, href: 'https://fonts.gstatic.com' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@100..900&display=swap' }
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@100..900&display=swap' },
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap' }
     ],
-    // script: [{ src: "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" }]
   },
 
   css: [
     'font-awesome/css/font-awesome.min.css',
-    '~/static/css/style.css',
+    '~/assets/css/style.scss',
   ],
 
   plugins: [
+    "~/plugins/modal.js",
+    "~/plugins/filters.js",
+    "~/plugins/autofocus.directive.js",
+    { src: '~/plugins/vlite.js', mode: 'client' },
 
+    // Keep at the end
+    "~/plugins/global.js",
   ],
 
   components: [
     '~/components',
+    {
+      path: '~/components/common',
+      prefix: '',
+    },
   ],
 
   buildModules: [
@@ -47,7 +57,7 @@ export default {
   ],
 
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/css/variables.scss'],
     theme: {
       themes: {
         light: {
