@@ -1,8 +1,10 @@
 <template>
-    <v-card rounded="xl" outlined :class="{ horizontal }" class="property-card">
+    <v-card rounded="xl" :class="{ horizontal }" class="property-card elevation-0">
         <div class="property-card-image">
             <div class="property-card-image-badge px-2 text-body-4 rounded-sm rounded-tl-0"
                 :class="propertyBadgeMap[property.badge].class">
+                <span :class="propertyBadgeMap[property.badge].class"
+                    class="property-card-image-badge-decor darken-3"></span>
                 {{ propertyBadgeMap[property.badge].title }}
             </div>
             <v-img :src="property.preview.src" height="145px" gradient="180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,1) 100%"

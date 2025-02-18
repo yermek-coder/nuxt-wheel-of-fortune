@@ -2,8 +2,8 @@
     <div class="property-feature-tabs-area d-flex text-uppercase"
         :class="{ 'active-third-col': activeAreaModel.children }">
         <v-list>
-            <v-list-item-group>
-                <v-list-item :value="null" active-class="teal--text">
+            <v-list-item-group :value="true">
+                <v-list-item :value="true" active-class="teal--text">
                     <v-list-item-content>
                         <v-list-item-title>area</v-list-item-title>
                     </v-list-item-content>
@@ -39,7 +39,7 @@ export default {
     props: ["filters"],
     feature: {
         type: "filter",
-        node: "property-filters-dialog",
+        nodes: ["property-filters-dialog", "agents-search-results"],
         title: "Area",
         order: 0,
     },

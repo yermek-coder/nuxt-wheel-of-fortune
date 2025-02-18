@@ -4,9 +4,11 @@
 
 <script>
 export default {
-    title: "Inbox",
-    icon: "mail",
-    layout: "default",
-    order: 300
+    route: {
+        title: "Inbox",
+        icon: "mail",
+        order: 300,
+        navGroup: "home"
+    },
 }
 </script>

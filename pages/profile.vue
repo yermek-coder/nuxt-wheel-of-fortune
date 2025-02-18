@@ -4,9 +4,11 @@
 
 <script>
 export default {
-    title: "Profile",
-    icon: "profile",
-    layout: "default",
-    order: 400
+    route: {
+        title: "Profile",
+        icon: "profile",
+        order: 400,
+        navGroup: "home"
+    },
 }
 </script>

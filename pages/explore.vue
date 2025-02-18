@@ -4,9 +4,11 @@
 
 <script>
 export default {
-    title: "Explore",
-    icon: "globe",
-    layout: "default",
-    order: 100
+    route: {
+        title: "Explore",
+        icon: "globe",
+        order: 100,
+        navGroup: "home"
+    },
 }
 </script>

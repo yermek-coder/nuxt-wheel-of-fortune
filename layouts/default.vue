@@ -1,8 +1,7 @@
 <template>
   <v-app dark>
     <v-main>
-      <Nuxt class="default-layout" />
-      <LayoutBottomNavigation />
+      <Nuxt />
     </v-main>
     <Modals />
   </v-app>
@@ -10,6 +9,6 @@
 
 <script>
 export default {
-  name: 'DefaultLayout'
+  name: 'default'
 }
 </script>

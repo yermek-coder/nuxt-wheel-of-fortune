@@ -38,10 +38,11 @@ const exampleProperties = [
     },
 ]
 
-const mockProperties = [...exampleProperties, ...exampleProperties, ...exampleProperties, ...exampleProperties,]
+const mockProperties = Array(4).fill(exampleProperties).flat()
 
 class PropertyService {
     $modal;
+    $router;
 
     getProperties() {
         return mockProperties
@@ -54,6 +55,8 @@ class PropertyService {
             contentClass: 'align-self-start ma-0 rounded-0',
             width: '100%',
             transition: "dialog-top-transition"
+        }).then(result => {
+            result && this.$router.push("/home/search-results")
         })
     }
 }

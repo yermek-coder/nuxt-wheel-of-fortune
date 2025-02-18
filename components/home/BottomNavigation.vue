@@ -10,20 +10,12 @@
 
 <script>
 export default {
-    data() {
-        return {
-            links: []
-        }
-    },
-    created() {
-        this.init()
-    },
-    methods: {
-        async init() {
-            this.links = this.$routes
-                .filter(route => route.component.layout === "default")
-                .sort((a, b) => (a.component.order > b.component.order ? 1 : -1))
-                .map(({ path, component }) => ({ name: component.title, path, icon: component.icon, }))
+    computed: {
+        links() {
+            return this.$routes
+                .filter(route => route.parent === "/" && route.component?.route && route.component?.route?.navGroup === "home")
+                .sort((a, b) => (a.component.route.order > b.component.route.order ? 1 : -1))
+                .map(({ path, component }) => ({ name: component.route.title, path, icon: component.route.icon, }))
         }
     }
 }

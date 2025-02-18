@@ -5,7 +5,7 @@
                 <a @click="$emit('dismiss')" role="button" class="black--text">
                     <v-icon>mdi-arrow-left</v-icon>
                 </a>
-                <PropertySearch v-autofocus :filters="cloneFilters" class="flex-grow-1" />
+                <SearchField v-autofocus :filters="cloneFilters" class="flex-grow-1" />
             </div>
 
             <v-chip-group v-model="tab" mandatory class="mb-2">
@@ -19,8 +19,8 @@
 
             <div class="d-flex gap-2">
                 <v-btn text x-large class="text-capitalize" elevation="0">reset</v-btn>
-                <v-btn @click="$emit('close')" color="teal" x-large class="white--text text-capitalize flex-grow-1"
-                    elevation="0">confirm</v-btn>
+                <v-btn @click="$emit('close', 'result')" color="teal" x-large
+                    class="white--text text-capitalize flex-grow-1" elevation="0">confirm</v-btn>
             </div>
         </v-container>
     </v-card>

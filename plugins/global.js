@@ -45,7 +45,7 @@ export default async function (context, inject) {
         if (pathParts.length === 1) {
             return {
                 ...page,
-                parent: 'index'
+                parent: '/'
             };
         }
 
@@ -63,8 +63,13 @@ export default async function (context, inject) {
         const service = (await import(`../services${path.slice(1)}`)).default;
 
         Object.keys(service)
-            .filter(attr => attr.indexOf("$") === 0 && context[attr])
-            .forEach(attr => (service[attr] = context[attr]));
+            .filter(attr => attr.startsWith("$"))
+            .forEach(attr => {
+                if (attr === '$router') {
+                    service[attr] = context.app.router
+                } else if (context[attr]) {
+                    service[attr] = context[attr]
+                }
+            });
     }
-
 }

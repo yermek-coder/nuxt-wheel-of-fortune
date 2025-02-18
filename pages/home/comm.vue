@@ -4,7 +4,10 @@
 
 <script>
 export default {
-    icon: "store",
-    order: 500
+    layout: "home",
+    route: {
+        icon: "store",
+        order: 500,
+    }
 }
 </script>

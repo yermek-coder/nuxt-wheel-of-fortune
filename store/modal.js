@@ -26,7 +26,7 @@ export default {
             });
         },
 
-        close({ commit, state }, spec, result = null) {
+        close({ commit, state }, { spec, result }) {
             const ref = state.modals.find(modal => modal.id === (spec.id || spec))
             if (ref) {
                 commit("removeModal", ref)

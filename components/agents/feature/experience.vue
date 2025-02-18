@@ -1,0 +1,29 @@
+<template>
+    <v-row dense class="text-uppercase">
+        <v-col v-for="(item, index) in sort" :key="index" cols="12">
+            <v-chip class="justify-center">{{ item }}</v-chip>
+        </v-col>
+    </v-row>
+</template>
+
+<script>
+export default {
+    props: ["filters"],
+    feature: {
+        type: "filter",
+        nodes: ["property-filters-dialog", "agents-search-results"],
+        title: "Experience",
+        order: 400,
+    },
+    data() {
+        return {
+            sort: [
+                "No limit",
+                "below 3 years",
+                "3 - 5 years",
+                "above 5 years",
+            ]
+        }
+    }
+}
+</script>

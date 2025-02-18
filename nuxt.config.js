@@ -1,3 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+
 export default {
   head: {
     titleTemplate: '%s | ' + process.env.TITLE,
@@ -25,14 +28,20 @@ export default {
 
   css: [
     'font-awesome/css/font-awesome.min.css',
-    '~/assets/css/style.scss',
+    // '~/assets/css/style.scss',
+    // Get all CSS and SCSS files from assets/css
+    ...fs.readdirSync(path.join(__dirname, 'assets/css'))
+      .filter(file => file.match(/\.(css|scss)$/))
+      .map(file => `~/assets/css/${file}`),
   ],
 
   plugins: [
     "~/plugins/modal.js",
     "~/plugins/filters.js",
-    "~/plugins/autofocus.directive.js",
     { src: '~/plugins/vlite.js', mode: 'client' },
+
+    //directives
+    "~/directives/autofocus.js",
 
     // Keep at the end
     "~/plugins/global.js",
@@ -57,7 +66,7 @@ export default {
   ],
 
   vuetify: {
-    customVariables: ['~/assets/css/variables.scss'],
+    customVariables: ['~/assets/css/vuetify/variables.scss'],
     theme: {
       themes: {
         light: {

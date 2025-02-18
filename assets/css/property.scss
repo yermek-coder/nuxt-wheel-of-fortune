@@ -1,5 +1,6 @@
 .property-card {
     height: fit-content;
+    outline: #E6E6E6 solid 1px !important;
 }
 
 .property-card.horizontal {
@@ -31,7 +32,16 @@
     position: absolute;
     z-index: 1;
     top: 1rem;
-    left: -2px;
+    left: -3px;
+
+    &-decor {
+        position: absolute;
+        height: 1px;
+        width: 2px;
+        left: 0;
+        top: -1px;
+        border-top-left-radius: 1px;
+    }
 }
 
 .property-card-button-vr {
@@ -53,6 +63,10 @@
     grid-template-rows: 1fr;
     gap: 1rem;
     row-gap: 0.625rem;
+}
+
+.properties-list-single-col {
+    grid-template-columns: 1fr;
 }
 
 .properties-promos {

@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         close(result) {
-            this.$store.dispatch("modal/close", this.modal, result)
+            this.$store.dispatch("modal/close", { spec: this.modal, result })
         }
     },
     computed: {

@@ -1,7 +1,7 @@
 <template>
     <v-menu offset-y>
         <template v-slot:activator="{ on, attrs, value }">
-            <v-chip v-bind="attrs" v-on="on">
+            <v-chip v-bind="attrs" v-on="on" outlined>
                 <span>
                     <slot name="activator" />
                 </span>

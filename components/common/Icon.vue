@@ -17,19 +17,14 @@ export default {
             iconComponent: null,
         };
     },
-    watch: {
-        icon: {
-            immediate: true,
-            async handler(newIconName) {
-                try {
-                    const iconModule = await import(`~/static/icons/${newIconName}.svg?inline`);
-                    this.iconComponent = defineAsyncComponent(() => Promise.resolve(iconModule.default));
-                } catch (error) {
-                    console.error(`Failed to load icon: ${newIconName}`, error);
-                    this.iconComponent = null;
-                }
-            },
-        },
-    },
+    async created() {
+        try {
+            const iconModule = await import(`~/static/icons/${this.icon}.svg?inline`);
+            this.iconComponent = defineAsyncComponent(() => Promise.resolve(iconModule.default));
+        } catch (error) {
+            console.error(`Failed to load icon: ${this.icon}`, error);
+            this.iconComponent = null;
+        }
+    }
 };
 </script>

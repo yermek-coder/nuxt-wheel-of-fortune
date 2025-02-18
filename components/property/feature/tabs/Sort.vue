@@ -11,7 +11,7 @@ export default {
     props: ["filters"],
     feature: {
         type: "filter",
-        node: "property-filters-dialog",
+        nodes: ["property-filters-dialog", "agents-search-results"],
         title: "Sort",
         order: 500,
     },
