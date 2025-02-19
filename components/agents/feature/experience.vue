@@ -1,7 +1,8 @@
 <template>
     <v-row dense class="text-uppercase">
         <v-col v-for="(item, index) in sort" :key="index" cols="12">
-            <v-chip class="justify-center">{{ item }}</v-chip>
+            <v-chip @click="setExperience(item)" :class="{ 'teal--text': filters.experience === item }"
+                class="justify-center">{{ item }}</v-chip>
         </v-col>
     </v-row>
 </template>
@@ -24,6 +25,11 @@ export default {
                 "above 5 years",
             ]
         }
+    },
+    methods: {
+        setExperience(experience) {
+            this.$set(this.filters, "experience", experience)
+        },
     }
 }
 </script>

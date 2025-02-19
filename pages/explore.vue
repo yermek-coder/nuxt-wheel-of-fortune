@@ -4,6 +4,7 @@
 
 <script>
 export default {
+    layout: "home",
     route: {
         title: "Explore",
         icon: "globe",

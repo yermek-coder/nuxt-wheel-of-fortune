@@ -171,7 +171,7 @@ export default {
             return section.type === "coins" ? "/icons/coin.svg" : "/icons/gem.svg"
         },
         showRewardDialog(section) {
-            document.dispatchEvent(new CustomEvent("reward-collected", { detail: section }))
+            this.$modal({ component: "RewardDialog", props: { reward: section }, transition: "scale-transition", "content-class": "elevation-0 reward-collected-dialog-wrapper" })
             this.$emit("win", section)
         }
     },

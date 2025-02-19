@@ -99,7 +99,7 @@ export default {
         },
         collectReward(reward) {
             if (!reward.collected) {
-                document.dispatchEvent(new CustomEvent("reward-collected", { detail: reward }))
+                this.$modal({ component: "RewardDialog", props: { reward }, transition: "scale-transition", "content-class": "elevation-0 reward-collected-dialog-wrapper" })
                 this.$emit("reward", reward)
             }
         },

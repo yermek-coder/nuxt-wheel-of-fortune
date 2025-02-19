@@ -1,9 +1,12 @@
 <template>
     <v-row dense class="property-feature-tabs-house-type text-uppercase">
         <v-col v-for="(type, index) in types" :key="index" cols="4">
-            <v-chip class="justify-center">{{ type }}</v-chip>
+            <ChipSelectorItem :model="filters" :value="type" property="type" class="justify-center">
+                {{ type }}
+            </ChipSelectorItem>
         </v-col>
     </v-row>
+
 </template>
 
 <script>

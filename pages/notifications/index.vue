@@ -11,7 +11,7 @@
                     class="elevation-0 rounded-xl d-flex gap-4 pa-4">
                     <div class="d-flex flex-column gap-3 flex-grow-1">
                         <span class="subtitle-1">{{ item.title }}</span>
-                        <span class="text-body-4 supressed">{{ item.title }}</span>
+                        <span class="text-body-4 text--secondary">{{ item.title }}</span>
                     </div>
                     <div class="d-flex flex-column gap-2">
                         <v-icon v-if="item.unread" class="text-body-4 red--text">mdi-circle</v-icon>

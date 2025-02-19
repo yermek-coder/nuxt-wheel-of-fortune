@@ -18,7 +18,7 @@
             <v-card outlined class="property-launches px-3 py-2">
                 <div class="pa-0 font-weight-bold d-flex align-center text-body-3">
                     <span>New Launches</span>
-                    <div class="text-caption ms-auto d-flex align-center">
+                    <div class="text-caption ms-auto d-flex align-center text--secondary">
                         <span>View All</span>
                         <v-icon class="text-body-1">mdi-chevron-right</v-icon>
                     </div>

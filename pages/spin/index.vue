@@ -4,7 +4,6 @@
 
 <script>
 export default {
-    layout: "spinner",
     data() {
         return {
             settings: {

@@ -38,7 +38,7 @@
             </v-chip-group>
 
             <div class="d-flex flex-wrap gap-4">
-                <v-card v-for="category in categories" :key="category" class="pa-3" outlined>
+                <v-card v-for="category in categories" :key="category" class="pa-3 white" outlined>
                     <div class="subtitle-1 font-weight-bold mb-2">{{ category }}</div>
                     <div class="d-flex flex-column gap-4">
                         <template v-for="(item, idx) in agents">

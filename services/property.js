@@ -36,9 +36,30 @@ const exampleProperties = [
         },
         vr: true,
     },
+    {
+        title: "Shop-office at Bandar Meru Raya",
+        category: "SUB",
+        badge: "highlight",
+        tags: ["FREEHOLD", "Built: 2023", "Commercial Residence"],
+        area: {
+            exact: 1200
+        },
+        price: {
+            perMonth: 3000
+        },
+        rooms: {
+            bathroom: 2,
+            bedroom: 3,
+        },
+        location: "Tanjung Tokong, Penang",
+        preview: {
+            src: "/home-card.jpg"
+        },
+        vr: true,
+    },
 ]
 
-const mockProperties = Array(4).fill(exampleProperties).flat()
+const mockProperties = Array(3).fill(exampleProperties).flat()
 
 class PropertyService {
     $modal;

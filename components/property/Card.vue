@@ -7,12 +7,12 @@
                     class="property-card-image-badge-decor darken-3"></span>
                 {{ propertyBadgeMap[property.badge].title }}
             </div>
-            <v-img :src="property.preview.src" height="145px" gradient="180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,1) 100%"
-                class="align-end rounded-xl mb-3">
+            <v-img :src="property.preview.src" height="145px" :class="{ 'mb-3': !horizontal }"
+                gradient="180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,1) 100%" class="align-end rounded-xl">
                 <button v-if="property.vr" class="property-card-button-vr px-2 py-1 rounded-xl d-flex">
                     <Icon icon="vr" />
                 </button>
-                <div class="white--text text-body-6 d-flex gap-1 align-center pa-2"><v-icon
+                <div class="white--text text-body-5 d-flex gap-1 align-center pa-2"><v-icon
                         class="white--text text-caption">mdi-map-marker</v-icon>
                     {{ property.location }}
                 </div>
@@ -28,7 +28,7 @@
                     {{ tag }}
                 </v-chip>
             </div>
-            <FeatureMarkers node="property-card" :entity="property" class="text-body-4 px-2" />
+            <FeatureMarkers node="property-card" :entity="property" class="text-body-4 px-2 text--secondary" />
             <v-divider></v-divider>
             <div class="property-card-footer px-2 mt-auto mb-2 teal--text text-body-3 font-weight-bold">
                 {{ getPrice(property) }}
@@ -69,8 +69,10 @@ export default {
         getPrice(item) {
             if (item.price?.range) {
                 return item.price.range.map(cost => this.$currency(cost)).join(" - ")
-            } else if (item.price.exact) {
+            } else if (item.price?.exact) {
                 return this.$currency(item.price.exact)
+            } else if (item.price?.perMonth) {
+                return this.$currency(item.price.perMonth) + "/month"
             }
         }
     }

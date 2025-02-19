@@ -34,10 +34,9 @@
                         <div class="pa-1">
                             <v-img :src="item.cover" height="126" class="rounded-xl rounded-b-0"></v-img>
                             <div class="subtitle-2">{{ item.title }}</div>
-                            <div class="supressed text-body-4">{{ item.credits }} credits</div>
+                            <div class="text--secondary text-body-4">{{ item.credits }} credits</div>
                         </div>
-                        <v-btn class="elevation-0 rounded-0 teal white--text flex-grow-1 text-capitalize"
-                            text>Redeem</v-btn>
+                        <v-btn class="elevation-0 rounded-0 teal white--text flex-grow-1" text>Redeem</v-btn>
                     </v-card>
                 </v-col>
             </v-row>

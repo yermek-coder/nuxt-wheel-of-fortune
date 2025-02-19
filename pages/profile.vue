@@ -4,6 +4,7 @@
 
 <script>
 export default {
+    layout: "home",
     route: {
         title: "Profile",
         icon: "profile",

@@ -15,7 +15,7 @@
             <PropertyCategories v-model="filters.category" class="mb-4" />
 
             <div class="properties-list properties-list-single-col gap-4">
-                <v-card v-for="category in categories" :key="category" class="pa-3" outlined>
+                <v-card v-for="category in categories" :key="category" class="pa-3 white" outlined>
                     <div class="subtitle-1 font-weight-bold mb-2">{{ category }}</div>
                     <div class="properties-list properties-list-single-col">
                         <PropertyCard v-for="(item, index) in properties.slice(0, 4)" :key="index" :property="item"

@@ -18,9 +18,9 @@
             <component v-if="activeTab" :is="activeTab.component" :filters="cloneFilters" class="mb-3" />
 
             <div class="d-flex gap-2">
-                <v-btn text x-large class="text-capitalize" elevation="0">reset</v-btn>
-                <v-btn @click="$emit('close', 'result')" color="teal" x-large
-                    class="white--text text-capitalize flex-grow-1" elevation="0">confirm</v-btn>
+                <v-btn text x-large elevation="0">reset</v-btn>
+                <v-btn @click="$emit('close', 'result')" color="teal" x-large class="white--text flex-grow-1"
+                    elevation="0">confirm</v-btn>
             </div>
         </v-container>
     </v-card>

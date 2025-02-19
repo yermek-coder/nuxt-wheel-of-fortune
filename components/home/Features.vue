@@ -1,14 +1,15 @@
 <template>
-    <v-container v-touch="{ left: () => folded = true, right: () => folded = false }" class="home-features">
-        <div class="home-features-grid">
-            <component v-for="feature in features.slice(0, 5)" :key="feature.component" :is="feature.component" />
-        </div>
-
-        <Collapsable :show="!folded">
+    <v-container class="home-features">
+        <div class="home-features-items" :style="{ '--anim-duration': `${duration}ms` }" :class="{ leaving, entering }">
             <div class="home-features-grid">
-                <component v-for="feature in features.slice(5)" :key="feature.component" :is="feature.component" />
+                <component v-for="feature in features.slice(0, 5)" :key="feature.component" :is="feature.component" />
             </div>
-        </Collapsable>
+            <Collapsable :show="!folded">
+                <div class="home-features-grid">
+                    <component v-for="feature in features.slice(5)" :key="feature.component" :is="feature.component" />
+                </div>
+            </Collapsable>
+        </div>
 
         <div class="home-features-indicator d-flex gap-1">
             <div :style="{ width: `${folded ? 10 : 5}px` }" :class="`lighten-${folded ? 2 : 5}`"
@@ -23,11 +24,28 @@
 import featureService from '~/services/feature';
 
 export default {
-    props: { open: Boolean },
+    props: { folded: Boolean },
     data() {
         return {
             features: [],
-            folded: !this.open
+            leaving: false,
+            entering: false,
+            duration: 300
+        }
+    },
+    watch: {
+        folded(value) {
+            if (value) {
+                this.entering = true;
+                setTimeout(() => {
+                    this.entering = false
+                }, 200)
+            } else {
+                this.leaving = true;
+                setTimeout(() => {
+                    this.leaving = false
+                }, 200)
+            }
         }
     },
     created() {

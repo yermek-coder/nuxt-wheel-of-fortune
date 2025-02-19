@@ -23,7 +23,7 @@
         </v-container>
 
         <v-container class="d-flex voucher-page-bottom-button">
-            <v-btn @click="reward" class="elevation-0 teal white--text flex-grow-1 text-capitalize">Redeem +100
+            <v-btn @click="reward" class="elevation-0 teal white--text flex-grow-1">Redeem +100
                 points</v-btn>
         </v-container>
     </div>
@@ -41,7 +41,14 @@ export default {
     },
     methods: {
         reward() {
-            this.$modal({ component: "VoucherRewardDialog", props: { voucher: this.voucher }, fullscreen: true })
+            this.$modal({
+                component: "SuccessDialog",
+                props: {
+                    title: this.voucher.title,
+                    description: `Congratulation you got ${this.voucher.title}. You can use this voucher based on the T&C.`,
+                },
+                fullscreen: true
+            })
         }
     }
 }

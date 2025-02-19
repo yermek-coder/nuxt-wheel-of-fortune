@@ -12,19 +12,23 @@
             </v-container>
         </div>
 
-        <v-container class="home-links pt-6">
-            <NuxtLink v-for="link in links" :key="link.path" :to="link.path"
-                class="home-links-link d-flex flex-column align-center px-1">
-                <div class="home-links-link-card teal lighten-5 d-flex align-center justify-center rounded-xl">
-                    <Icon :icon="link.icon" />
-                </div>
-                <div class="home-links-link-text text-body-4 font-weight-bold text-uppercase text-center text--primary">
-                    {{ link.title }}
-                </div>
-            </NuxtLink>
-        </v-container>
+        <div v-touch="{ left: () => folded = true, right: () => folded = false }">
+            <v-container class="home-links pt-6 pb-0">
+                <NuxtLink v-for="link in links" :key="link.path" :to="link.path"
+                    class="home-links-link d-flex flex-column align-center px-1">
+                    <div class="home-links-link-card teal lighten-5 d-flex align-center justify-center rounded-xl">
+                        <Icon :icon="link.icon" />
+                    </div>
+                    <div
+                        class="home-links-link-text text-body-4 font-weight-bold text-uppercase text-center text--primary">
+                        {{ link.title }}
+                    </div>
+                </NuxtLink>
+            </v-container>
 
-        <HomeFeatures class="mb-8" />
+            <HomeFeatures :folded="folded" class="mb-8" />
+        </div>
+
         <PropertyPromos />
 
         <v-container>
@@ -34,7 +38,7 @@
                     <span class="text-uppercase font-weight-bold white--text text-body-3">TOP SERVICES SEARCH</span>
                 </div>
                 <div class="home-services-body pa-3">
-                    <div v-for="(item, idx) in services" :key="idx" class="d-flex flex-wrap justify-center">
+                    <div v-for="(item, idx) in services" :key="idx" class="d-flex flex-column align-center">
                         <Icon :icon="item.icon" />
                         <div class="text-body-4">{{ item.title }}</div>
                     </div>
@@ -45,7 +49,7 @@
         <v-container class="home-videos mb-5">
             <div class="d-flex align-center justify-space-between mb-4">
                 <div class="text-h6">Videos</div>
-                <NuxtLink to="#" class="text-decoration-underline text-caption black--text">View All</NuxtLink>
+                <NuxtLink to="#" class="text-decoration-underline text-caption text--secondary">View All</NuxtLink>
             </div>
 
             <div class="home-videos-list overflow-x-auto">
@@ -85,6 +89,7 @@ export default {
     layout: "home",
     data() {
         return {
+            folded: true,
             services: [
                 {
                     title: "Moving",

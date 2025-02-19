@@ -15,6 +15,11 @@
   background-color: var(--bg-body);
 }
 
+.theme--light.v-chip:not(.v-chip--active) {
+  background: #F4F4F7 !important;
+  color: #6B6F89;
+}
+
 .v-application a {
   text-decoration: none;
   color: inherit;
@@ -35,4 +40,12 @@
 
 .rounded-lg-2 {
   border-radius: 10px;
+}
+
+.h-100vh {
+  height: 100dvh;
+}
+
+.w-100 {
+  width: 100% !important;
 }

@@ -1,7 +1,9 @@
 <template>
     <v-row dense class="text-uppercase">
         <v-col v-for="(item, index) in sort" :key="index" cols="12">
-            <v-chip class="justify-center">{{ item }}</v-chip>
+            <ChipSelectorItem :model="filters" :value="item" property="sort" class="justify-center">
+                {{ item }}
+            </ChipSelectorItem>
         </v-col>
     </v-row>
 </template>

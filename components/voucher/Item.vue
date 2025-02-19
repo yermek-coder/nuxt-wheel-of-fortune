@@ -3,11 +3,11 @@
         :class="{ passive: voucher.past }">
         <div class="flex-grow-1 d-flex flex-column pa-4 gap-3">
             <div class="subtitle-1">{{ voucher.title }}</div>
-            <div class="text-body-2 supressed">{{ voucher.description }}</div>
+            <div class="text-body-2 text--secondary">{{ voucher.description }}</div>
             <div class="d-flex gap-2 align-center">
                 <v-icon>mdi-calendar-month-outline</v-icon>
                 <div class="text-body-3">Expired {{ voucher.expired }}</div>
-                <v-btn :disabled="voucher.past" class="teal white--text elevation-0 text-capitalize" x-small>Use
+                <v-btn :disabled="voucher.past" class="teal white--text elevation-0" x-small>Use
                     Now</v-btn>
             </div>
         </div>

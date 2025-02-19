@@ -12,7 +12,10 @@
 
         <v-row dense class="mb-2">
             <v-col v-for="(price, index) in priceRange" :key="index" cols="4">
-                <v-chip class="property-feature-tabs-price-chip justify-center">{{ price }}</v-chip>
+                <ChipSelectorItem :model="filters" :value="price" property="price"
+                    class="property-feature-tabs-price-chip justify-center">
+                    {{ price }}
+                </ChipSelectorItem>
             </v-col>
         </v-row>
 
@@ -48,15 +51,18 @@ export default {
     data() {
         return {
             priceRange: [
-                '300K Below',
-                '100K -150K',
+                '100K Below',
+                '100K - 150K',
                 '150K-200K',
-                '300K Below',
-                '100K -150K',
-                '150K-200K',
+                '300K - 350K',
+                '400K - 450K',
+                '500K - 500K',
             ],
             range: [200000, 600000]
         }
+    },
+    mounted() {
+        this.setMode('total')
     },
     methods: {
         setMode(mode) {
