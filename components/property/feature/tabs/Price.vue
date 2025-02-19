@@ -33,13 +33,15 @@
 
             <v-range-slider v-model="range" :max="1000000" :min="10000" thumb-label="always"
                 track-fill-color="teal lighten-2" track-color="grey lighten-3" class="align-center">
-                <template #thumb-label="{ value }">{{ $currency(value, "usdCompact") }}</template>
+                <template #thumb-label="{ value }">{{ currency(value) }}</template>
             </v-range-slider>
         </div>
     </div>
 </template>
 
 <script>
+import { debounce } from 'underscore';
+
 export default {
     props: ["filters"],
     feature: {
@@ -67,6 +69,9 @@ export default {
     methods: {
         setMode(mode) {
             this.$set(this.filters, "mode", mode)
+        },
+        currency(value) {
+            return `$${(value / 1000) << 0}K`
         }
     }
 }
