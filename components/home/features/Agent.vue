@@ -1,8 +1,8 @@
 <template>
-    <div class="home-feature d-flex flex-column align-center gap-1">
+    <NuxtLink to="/agents" class="home-feature d-flex flex-column align-center gap-1">
         <Icon icon="kid" />
         <span class="home-feature-title text-body-4 text-uppercase font-weight-bold">Agent</span>
-    </div>
+    </NuxtLink>
 </template>
 
 <script>

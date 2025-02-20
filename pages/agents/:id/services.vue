@@ -46,7 +46,7 @@
                 </div>
 
                 <p class="text-body-4 text--secondary mb-0">I confirm that I have read the <span
-                        class="teal--color">privacy
+                        class="teal--text">privacy
                         policy</span>
                     and allow my
                     information to be shared with this agent who may contact me later.</p>

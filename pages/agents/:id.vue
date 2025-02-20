@@ -2,7 +2,7 @@
     <div class="agents-agent">
         <v-container class="pb-0 mb-3 white">
             <div class="d-flex align-center justify-space-between gap-3 py-4">
-                <v-btn @click="$router.go(-1)" icon small>
+                <v-btn to="/agents" icon small>
                     <v-icon color="black">mdi-chevron-left</v-icon>
                 </v-btn>
                 <div class="text-h7 font-weight-medium">Agent</div>
@@ -95,7 +95,7 @@ export default {
     },
     methods: {
         share() {
-            if (navigator?.share) {
+            if (navigator?.share1) {
                 navigator.share({
                     title: this.agent.name + " " + this.agent.surname,
                     text: this.agent.about,

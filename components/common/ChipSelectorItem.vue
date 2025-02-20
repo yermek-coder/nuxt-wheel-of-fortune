@@ -1,13 +1,4 @@
 <template>
-    <!-- <v-row v-bind="$attrs">
-        <v-col v-for="(option, index) in options" :key="index" cols="4">
-            <v-chip @click="setValue(option)" :class="{ 'teal--text': value[property] === option }"
-                class="justify-center">
-                {{ option }}
-            </v-chip>
-        </v-col>
-    </v-row> -->
-
     <v-chip @click="setValue(value)" :class="{ 'teal--text': model[property] === value }">
         <slot />
     </v-chip>

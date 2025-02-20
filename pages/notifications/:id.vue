@@ -27,7 +27,7 @@
         </v-container>
 
         <v-container class="d-flex voucher-page-bottom-button">
-            <v-btn @click="reward" class="elevation-0 teal white--text flex-grow-1">Redeem +100
+            <v-btn @click="reward" x-large class="elevation-0 teal lighten-1 white--text flex-grow-1">Redeem +100
                 points</v-btn>
         </v-container>
     </div>
@@ -36,5 +36,17 @@
 <script>
 export default {
     route: { title: "Details" },
+    methods: {
+        reward() {
+            this.$modal({
+                component: "SuccessDialog",
+                props: {
+                    title: "RM 5 Cash Voucher",
+                    description: `Congratulation you got RM 5 Cash Voucher. You can use this voucher based on the T&C.`,
+                },
+                fullscreen: true
+            })
+        }
+    }
 }
 </script>

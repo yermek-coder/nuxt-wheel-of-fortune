@@ -4,7 +4,7 @@
             <div class="home-features-grid">
                 <component v-for="feature in features.slice(0, 5)" :key="feature.component" :is="feature.component" />
             </div>
-            <Collapsable :show="!folded">
+            <Collapsable :show="!folded" :duration="200">
                 <div class="home-features-grid">
                     <component v-for="feature in features.slice(5)" :key="feature.component" :is="feature.component" />
                 </div>

@@ -25,8 +25,8 @@
             </div>
 
             <div class="d-flex gap-4">
-                <v-btn color="teal" x-large outlined>skip</v-btn>
-                <v-btn @click="next" color="teal" x-large class="white--text flex-grow-1">next
+                <v-btn color="teal lighten-1" x-large outlined>skip</v-btn>
+                <v-btn @click="next" color="teal lighten-1" x-large class="white--text flex-grow-1">next
                     step</v-btn>
             </div>
         </v-container>

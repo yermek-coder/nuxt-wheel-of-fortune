@@ -15,8 +15,8 @@
   background-color: var(--bg-body);
 }
 
-.theme--light.v-chip:not(.v-chip--active) {
-  background: #F4F4F7 !important;
+.v-application .theme--light.v-chip:not(.v-chip--active) {
+  background: #F4F4F7;
   color: #6B6F89;
 }
 

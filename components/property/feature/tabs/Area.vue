@@ -12,8 +12,9 @@
         </v-list>
 
         <v-list>
-            <v-list-item-group v-model="activeArea">
-                <v-list-item v-for="(item, i) in areas" :key="i" :value="item.id" active-class="teal--text">
+            <v-list-item-group v-model="filters.activeArea">
+                <v-list-item @click="setArea(item)" v-for="(item, i) in areas" :key="i" :value="item.id"
+                    active-class="teal--text">
                     <v-list-item-content>
                         <v-list-item-title v-text="item.title"></v-list-item-title>
                     </v-list-item-content>
@@ -23,8 +24,8 @@
 
         <v-list>
             <v-list-item-group v-model="activeChildrenArea">
-                <v-list-item v-for="(item, i) in activeAreaModel.children" :key="i" :value="item.id"
-                    active-class="teal--text">
+                <v-list-item @click="setArea(item)" v-for="(item, i) in activeAreaModel.children" :key="i"
+                    :value="item.id" active-class="teal--text">
                     <v-list-item-content>
                         <v-list-item-title v-text="item.title"></v-list-item-title>
                     </v-list-item-content>
@@ -97,13 +98,17 @@ export default {
                     id: "kuala_lumpur"
                 }
             ],
-            activeArea: null,
             activeChildrenArea: null,
         }
     },
     computed: {
         activeAreaModel() {
-            return this.areas.find(area => area.id === this.activeArea)
+            return this.areas.find(area => area.id === this.filters?.activeArea) || {}
+        }
+    },
+    methods: {
+        setArea(item) {
+            this.$set(this.filters, 'area', item.id)
         }
     }
 }

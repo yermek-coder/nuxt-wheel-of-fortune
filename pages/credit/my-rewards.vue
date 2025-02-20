@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="credit-my-rewards">
         <v-container class="pb-0 mb-3 white">
             <div class="d-flex align-center gap-3 py-4">
                 <v-btn @click="$router.push('/credit')" icon small>
@@ -10,8 +10,8 @@
         </v-container>
 
         <v-container>
-            <v-card outlined class="rounded-pill d-flex pa-1 grey lighten-3">
-                <v-chip v-for="item in links" :key="item.path" :class="pillClass(item)"
+            <v-card outlined class="rounded-pill d-flex pa-1 grey lighten-3 credit-my-rewards-nav">
+                <v-chip v-for="item in links" :key="item.path" :class="pillClass(item)" large
                     class="flex-grow-1 justify-center">
                     <NuxtLink :to="item.path">
                         {{ item.title }}
@@ -60,9 +60,9 @@ export default {
         },
         pillClass(item) {
             if (item.name === this.$route.name) {
-                return "teal white--text"
+                return "teal lighten-1 white--text"
             } else {
-                return "grey--text  grey lighten-3"
+                return "grey--text grey lighten-3"
             }
         }
     }

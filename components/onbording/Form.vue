@@ -19,7 +19,7 @@
             </template>
         </v-text-field>
 
-        <v-btn type="submit" x-large color="teal" class="white--text flex-grow-1">Confirm</v-btn>
+        <v-btn type="submit" x-large color="teal lighten-1" class="white--text flex-grow-1">Confirm</v-btn>
     </v-form>
 </template>
 

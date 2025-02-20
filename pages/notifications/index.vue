@@ -25,6 +25,9 @@
 
 <script>
 export default {
+    route: {
+        title: "Notification"
+    },
     data() {
         return {
             notifications: [{

@@ -2,6 +2,7 @@
     width: 2px;
     background: url(/decorations/voucher-bg.svg);
     position: relative;
+
     &::before {
         content: "";
         position: absolute;
@@ -13,6 +14,7 @@
         background-color: var(--bg-body);
         border-radius: 400px;
     }
+
     &::after {
         content: "";
         position: absolute;
@@ -28,7 +30,8 @@
 
 .voucher-item.passive {
     pointer-events: none;
-    & > * {
+
+    &>* {
         opacity: 0.5;
     }
 }
@@ -37,4 +40,8 @@
     position: fixed;
     bottom: 0;
     left: 0;
+}
+
+.credit-my-rewards-nav .v-chip {
+    height: 44px !important;
 }
