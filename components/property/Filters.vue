@@ -1,5 +1,5 @@
 <template>
-    <div class="property-filters overflow-x-auto d-flex align-items-center gap-2">
+    <div class="property-filters overflow-x-auto hide-scrollbar d-flex align-items-center gap-2">
         <div v-for="feature in features" :key="feature.component" :class="feature.classname">
             <component :is="feature.component" :feature="feature" v-bind="$props" />
         </div>

@@ -50,6 +50,10 @@ export default {
     },
     methods: {
         next() {
+            if (this.step === this.features.length - 1) {
+                this.$router.push('/home/search-results')
+            }
+
             this.step = Math.min(this.features.length - 1, this.step + 1)
         }
     }

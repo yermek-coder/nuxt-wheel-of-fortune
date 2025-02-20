@@ -24,12 +24,14 @@ export default {
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@100..900&display=swap' },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap' }
     ],
+    script: [
+      { src: "/country-codes.js", defer: true, }
+    ]
   },
 
   css: [
     'font-awesome/css/font-awesome.min.css',
-    // '~/assets/css/style.scss',
-    // Get all CSS and SCSS files from assets/css
+    // Have to restart dev server to load newly added file
     ...fs.readdirSync(path.join(__dirname, 'assets/css'))
       .filter(file => file.match(/\.(css|scss)$/))
       .map(file => `~/assets/css/${file}`),

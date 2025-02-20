@@ -1,5 +1,5 @@
 <template>
-    <v-container class="properties-promos overflow-x-auto">
+    <v-container class="properties-promos overflow-x-auto hide-scrollbar">
         <div v-for="(promo, index) in promos" :key="(index)"
             class="py-4 px-5 d-inline-flex flex-column align-start properties-promos-item rounded-lg-2 overflow-hidden white--text"
             :style="`background: linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${promo.bgImg}) no-repeat center / cover`">

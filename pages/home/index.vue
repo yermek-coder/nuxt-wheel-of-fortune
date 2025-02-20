@@ -52,7 +52,7 @@
                 <NuxtLink to="#" class="text-decoration-underline text-caption text--secondary">View All</NuxtLink>
             </div>
 
-            <div class="home-videos-list overflow-x-auto">
+            <div class="home-videos-list overflow-x-auto hide-scrollbar">
                 <div @click="playVideo(item)" v-for="(item, idx) in videos" :key="idx" class="home-videos-list-item">
                     <v-btn text color="white"><v-icon class="text-h3">mdi-play-circle-outline</v-icon></v-btn>
                     <img :src="item.thumbnail" alt="Video" class="rounded-xl">

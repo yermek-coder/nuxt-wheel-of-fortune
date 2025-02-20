@@ -27,7 +27,7 @@
                     Explore new and upcoming property launches in Malaysia
                 </v-card-subtitle>
 
-                <div class="property-launches-body d-flex overflow-auto gap-1">
+                <div class="property-launches-body d-flex overflow-auto hide-scrollbar gap-1">
                     <div v-for="(item, idx) in launches" :key="idx" class="property-launches-body-item">
                         <v-img :src="item.preview" height="88" width="88" class="align-end rounded-lg"
                             gradient="0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 15px">

@@ -1,19 +1,32 @@
 <template>
-    <v-form @submit.prevent="submit" class="d-flex flex-column">
-        <v-select :items="items" outlined label="City" class="rounded-xl" />
-        <v-text-field outlined label="Residential Name" class="rounded-xl" />
-        <span class="text--secondary text-body-3 mb-1">Phone Number</span>
-        <v-text-field outlined placeholder="Phone Number" class="rounded-xl">
-            <template #prepend-inner>
-                <div class="d-flex gap-2 align-center">
-                    <Icon icon="flag" />
-                    <span class="text--secondary">+62</span>
-                    <v-icon>mdi-chevron-down</v-icon>
-                </div>
-            </template>
-        </v-text-field>
+    <v-form @submit.prevent="submit" class="onbording-form d-flex flex-column gap-4">
+        <v-select :items="items" outlined hide-details label="City" color="teal lighten-1" class="rounded-xl" />
+        <v-text-field outlined hide-details label="Residential Name" color="teal lighten-1" class="rounded-xl" />
+        <div class="d-flex flex-column gap-2">
+            <span class="text--secondary text-body-3">Phone Number</span>
+            <v-text-field outlined hide-details placeholder="Phone Number" type="number" color="teal lighten-1"
+                class="rounded-xl onbording-form-phone">
+                <template #prepend-inner>
+                    <v-menu offset-y max-height="50vh">
+                        <template v-slot:activator="{ on, attrs, value }">
+                            <div v-bind="attrs" v-on="on" class="d-flex align-center gap-2">
+                                <Icon icon="flag" />
+                                <span class="text--secondary">+{{ countryCode }}</span>
+                                <v-icon>mdi-chevron-down</v-icon>
+                            </div>
+                        </template>
+                        <v-list ref="countriesList">
+                            <v-list-item @click="countryCode = item.code" v-for="(item, index) in countryCodes"
+                                :key="index">
+                                <v-list-item-title>{{ item.country }}</v-list-item-title>
+                            </v-list-item>
+                        </v-list>
+                    </v-menu>
+                </template>
+            </v-text-field>
+        </div>
 
-        <v-text-field outlined label="Residential Name" class="rounded-xl">
+        <v-text-field outlined hide-details label="Residential Name" color="teal lighten-1" class="rounded-xl">
             <template #append>
                 <span class="teal--text">Request</span>
             </template>
@@ -28,7 +41,12 @@ export default {
     data() {
         return {
             items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+            countryCodes: [],
+            countryCode: "62"
         }
+    },
+    mounted() {
+        this.countryCodes = window.countryCodes
     },
     methods: {
         submit() {

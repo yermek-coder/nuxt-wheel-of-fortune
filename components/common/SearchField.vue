@@ -1,8 +1,8 @@
 <template>
     <v-text-field @focus="openFilters" v-model="filters.q" :placeholder="placeholder" outlined clearable hide-details
-        clear-icon="mdi-close-circle" color="grey" class="rounded-xl property-search">
+        clear-icon="mdi-close-circle" color="teal lighten-1" class="rounded-xl property-search">
         <template #prepend-inner>
-            <div class="d-flex gap-3 align-center black--text">
+            <div class="d-flex gap-2 align-center ms-1 black--text">
                 <span class="font-weight-bold">PG</span>
                 <v-icon>mdi-chevron-down</v-icon>
             </div>

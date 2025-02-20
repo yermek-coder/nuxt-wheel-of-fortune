@@ -1,10 +1,10 @@
 <template>
-    <div class="onbording">
+    <div class="onbording h-100vh d-flex flex-column">
         <v-container class="pb-0 mb-3 white">
             <Breadcrumbs />
         </v-container>
 
-        <v-container>
+        <v-container class="flex-grow-1">
             <div class="text-center mb-14">
                 <div class="text-h6">What would you like to do?</div>
                 <div class="text-body-2 font-weight-light">Based on your needs, we recommend more suitable content and
@@ -23,7 +23,9 @@
                     </div>
                 </v-btn>
             </div>
+        </v-container>
 
+        <v-container class="">
             <div class="d-flex gap-4">
                 <v-btn color="teal lighten-1" x-large outlined>skip</v-btn>
                 <v-btn @click="next" color="teal lighten-1" x-large class="white--text flex-grow-1">next
