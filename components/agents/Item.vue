@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink :to="'/agents/' + agent.id" class="agents-item d-flex gap-4 justify-space-between">
+    <NuxtLink :to="'/agents/' + agent.id" class="agents-item d-flex gap-3 justify-space-between">
         <v-avatar><img :src="agent.avatar" alt="Avatar"></v-avatar>
         <div class="d-flex flex-column">
             <div class="d-flex align-center gap-2">
@@ -12,12 +12,14 @@
                 <v-chip small outlined>+1</v-chip>
             </div>
         </div>
-        <v-btn fab class="elevation-0" small>
-            <Icon icon="chat" />
-        </v-btn>
-        <v-btn fab class="elevation-0 green white--text" small>
-            <v-icon>mdi-whatsapp</v-icon>
-        </v-btn>
+        <div class="d-flex gap-2">
+            <v-btn fab class="elevation-0" small>
+                <Icon icon="chat" />
+            </v-btn>
+            <v-btn fab class="elevation-0 green white--text" small>
+                <v-icon>mdi-whatsapp</v-icon>
+            </v-btn>
+        </div>
     </NuxtLink>
 </template>
 

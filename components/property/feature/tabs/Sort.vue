@@ -16,6 +16,7 @@ export default {
         nodes: ["property-filters-dialog", "agents-search-results"],
         title: "Sort",
         order: 500,
+        activeTitle: "Experience from high to low"
     },
     data() {
         return {

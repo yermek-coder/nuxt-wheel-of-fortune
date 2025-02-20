@@ -5,7 +5,6 @@
                 <a @click="$emit('dismiss')" role="button" class="black--text">
                     <v-icon>mdi-arrow-left</v-icon>
                 </a>
-                <SearchField :filters="cloneFilters" class="flex-grow-1" />
             </div>
 
             <v-chip-group v-model="tab" mandatory class="mb-2">
@@ -19,8 +18,8 @@
 
             <div class="d-flex gap-2">
                 <v-btn @click="reset" text x-large elevation="0">reset</v-btn>
-                <v-btn @click="$emit('close', 'result')" color="teal lighten-1" x-large class="white--text flex-grow-1"
-                    elevation="0">confirm</v-btn>
+                <v-btn @click="$emit('close', cloneFilters)" color="teal lighten-1" x-large
+                    class="white--text flex-grow-1" elevation="0">confirm</v-btn>
             </div>
         </v-container>
     </v-card>
@@ -43,7 +42,7 @@ export default {
             return this.tabs.find(tab => tab.component === this.tab)
         },
         tabs() {
-            return featureService.getFeatures("filter", { node: "property-filters-dialog", filters: this.cloneFilters })
+            return featureService.getFeatures("filter", { node: "agents-search-results", filters: this.cloneFilters })
         }
     },
     methods: {

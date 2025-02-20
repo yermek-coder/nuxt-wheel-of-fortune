@@ -8,15 +8,16 @@
 
 <script>
 export default {
-    props: ["value"],
-    data() {
-        return {
-            categories: [
+    props: {
+        value: String | Number,
+        categories: {
+            type: Array,
+            default: () => ([
                 { title: "All", value: "all" },
                 { title: "2 Parkings", value: "2_parkings" },
                 { title: "Latest", value: "latest" },
                 { title: "2 Bedrooms", value: "2_bedrooms" },
-            ]
+            ])
         }
     },
     computed: {

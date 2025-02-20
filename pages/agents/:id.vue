@@ -95,7 +95,7 @@ export default {
     },
     methods: {
         share() {
-            if (navigator?.share1) {
+            if (navigator?.share) {
                 navigator.share({
                     title: this.agent.name + " " + this.agent.surname,
                     text: this.agent.about,

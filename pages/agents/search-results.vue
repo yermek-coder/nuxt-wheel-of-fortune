@@ -4,20 +4,18 @@
             <Breadcrumbs />
         </v-container>
 
-        <v-container class="py-3">
+        <v-container class="py-0">
             <SearchField />
         </v-container>
 
         <v-container>
-            <v-chip-group v-model="activeFeature">
-                <v-chip @click="selectFeature(feature)" v-for="(feature, index) in features" :key="index"
-                    :value="feature.component" active-class="teal--text text-lighten-2" outlined>
-                    {{ feature.title }}
-                    <v-icon class="ms-1">mdi-chevron-{{ feature.component === activeFeature ? 'up' : 'down' }}</v-icon>
+            <v-chip-group>
+                <v-chip @click="openFilter" v-for="(feature, index) in features" :key="index"
+                    active-class="teal--text text-lighten-2" :class="{ 'teal--text': afterSearch }" outlined>
+                    {{ afterSearch ? feature.activeTitle : feature.title }}
+                    <v-icon>mdi-chevron-down</v-icon>
                 </v-chip>
             </v-chip-group>
-
-            <component v-if="activeFeature" :is="activeFeature" :filters="filters" class="mt-3"></component>
         </v-container>
 
         <v-container>
@@ -39,11 +37,11 @@ export default {
     route: { title: "Search results" },
     data() {
         return {
-            activeFeature: null,
             category: null,
             categories: ['Top Lister', 'Featured'],
             agents: agentService.getAgents(),
-            filters: {}
+            filters: {},
+            afterSearch: false
         }
     },
     computed: {
@@ -52,11 +50,10 @@ export default {
         }
     },
     methods: {
-        selectFeature(feature) {
-            if (feature.component === this.activeFeature) {
-                this.activeFeature = null
-            } else {
-                this.activeFeature = feature.component;
+        async openFilter() {
+            const result = await agentService.openFilterDialog(this.filters)
+            if (result) {
+                this.afterSearch = true
             }
         }
     }

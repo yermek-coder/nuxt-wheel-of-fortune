@@ -95,18 +95,6 @@
     top: 0.25rem;
 }
 
-.property-search {
-    padding-block: 0.625rem;
-}
-
-.property-search input {
-    width: 100%;
-
-    &:focus-visible {
-        outline: none;
-    }
-}
-
 .property-feature-tabs-price-chip {
     width: 100%;
 }
@@ -155,4 +143,18 @@
 .property-feature-tabs-house-type .v-chip,
 .property-feature-tabs-more .v-chip {
     width: 100%;
+}
+
+.property-search.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)>.v-input__control>.v-input__slot fieldset {
+    color: #EDEDF3 !important;
+    border: none;
+}
+
+.property-search input {
+    caret-color: grey;
+}
+
+.property-search.v-text-field--outlined.v-input--is-focused fieldset,
+.v-text-field--outlined.v-input--has-state fieldset {
+    border: 2px solid #d4d4db !important;
 }

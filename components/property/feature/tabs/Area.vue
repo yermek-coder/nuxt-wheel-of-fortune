@@ -1,7 +1,7 @@
 <template>
     <div class="property-feature-tabs-area d-flex text-uppercase"
         :class="{ 'active-third-col': activeAreaModel.children }">
-        <v-list>
+        <v-list class="pt-0">
             <v-list-item-group :value="true">
                 <v-list-item :value="true" active-class="teal--text">
                     <v-list-item-content>
@@ -11,7 +11,7 @@
             </v-list-item-group>
         </v-list>
 
-        <v-list>
+        <v-list class="pt-0">
             <v-list-item-group v-model="filters.activeArea">
                 <v-list-item @click="setArea(item)" v-for="(item, i) in areas" :key="i" :value="item.id"
                     active-class="teal--text">
@@ -22,7 +22,7 @@
             </v-list-item-group>
         </v-list>
 
-        <v-list>
+        <v-list class="pt-0">
             <v-list-item-group v-model="activeChildrenArea">
                 <v-list-item @click="setArea(item)" v-for="(item, i) in activeAreaModel.children" :key="i"
                     :value="item.id" active-class="teal--text">
@@ -43,6 +43,7 @@ export default {
         nodes: ["property-filters-dialog", "agents-search-results"],
         title: "Area",
         order: 0,
+        activeTitle: "Bayan Lepas",
     },
     data() {
         return {

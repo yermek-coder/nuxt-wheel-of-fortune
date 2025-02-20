@@ -1,12 +1,17 @@
 <template>
-    <div class="property-search px-4 d-flex align-center gap-3">
-        <span class="font-weight-bold">PG</span>
-        <v-icon>mdi-chevron-down</v-icon>
-        <input @focus="openFilters" v-model="filters.q" type="text" :placeholder="placeholder">
-    </div>
+    <v-text-field @focus="openFilters" v-model="filters.q" :placeholder="placeholder" outlined clearable hide-details
+        clear-icon="mdi-close-circle" color="grey" class="rounded-xl property-search">
+        <template #prepend-inner>
+            <div class="d-flex gap-3 align-center black--text">
+                <span class="font-weight-bold">PG</span>
+                <v-icon>mdi-chevron-down</v-icon>
+            </div>
+        </template>
+    </v-text-field>
 </template>
 
 <script>
+import { debounce } from 'underscore';
 import propertyService from '~/services/property';
 
 export default {
@@ -16,11 +21,12 @@ export default {
         placeholder: { type: String, default: "Search here" }
     },
     methods: {
-        openFilters() {
+        /** @fixme Focus called multiple time for some reason */
+        openFilters: debounce(function () {
             if (this.action) {
                 propertyService.openSearchDialog(this.filters)
             }
-        }
+        }, 100)
     }
 }
 </script>

@@ -15,6 +15,7 @@ export default {
         nodes: ["property-filters-dialog", "agents-search-results"],
         title: "Experience",
         order: 400,
+        activeTitle: "Below 3 years",
     },
     data() {
         return {

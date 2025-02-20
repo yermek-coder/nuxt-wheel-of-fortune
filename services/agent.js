@@ -1,4 +1,6 @@
 class AgentService {
+    $modal;
+
     getAgents() {
         return [
             {
@@ -47,9 +49,20 @@ class AgentService {
             })
         ]
     }
+
     getAgent(id) {
         const list = this.getAgents()
         return list.find(item => item.id == id) || list[1]
+    }
+
+    openFilterDialog(filters) {
+        return this.$modal({
+            component: "AgentsFiltersDialog",
+            props: { filters },
+            contentClass: 'align-self-start ma-0 rounded-0',
+            width: '100%',
+            transition: "dialog-top-transition"
+        })
     }
 }
 
