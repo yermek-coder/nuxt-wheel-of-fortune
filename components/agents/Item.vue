@@ -1,7 +1,7 @@
 <template>
-    <NuxtLink :to="'/agents/' + agent.id" class="agents-item d-flex gap-3 justify-space-between">
+    <NuxtLink :to="'/agents/' + agent.id" class="agents-item d-flex gap-4">
         <v-avatar><img :src="agent.avatar" alt="Avatar"></v-avatar>
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column flex-grow-1">
             <div class="d-flex align-center gap-2">
                 <span>{{ agent.name + " " + agent.surname }}</span>
                 <v-icon class="teal--text" small>mdi-check-circle</v-icon>
