@@ -105,25 +105,13 @@
     top: 100%;
     width: auto !important;
     height: auto !important;
-    background: white !important;
-    background-color: white !important;
     border-radius: 0.25rem;
-    border: 1px solid #EEEEEE !important;
     padding: 0.25rem;
-    color: black;
     box-shadow: 0 8px 12px -5px rgba(0, 0, 0, 0.12);
 }
 
 .property-feature-tabs-price .v-slider--horizontal .v-slider__thumb-label>* {
     transform: none;
-}
-
-.property-feature-tabs-price .v-slider__thumb {
-    background-color: #00B5B0 !important;
-
-    &:before {
-        background-color: #00B5B0;
-    }
 }
 
 .property-feature-tabs-area>.v-list {

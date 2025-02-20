@@ -31,8 +31,9 @@
                 <span class="caption text-body-3">Reset</span>
             </div>
 
-            <v-range-slider v-model="range" :max="1000000" :min="10000" thumb-label="always"
-                track-fill-color="teal lighten-2" track-color="grey lighten-3" class="align-center">
+            <v-range-slider v-model="range" :max="1000000" :min="10000" thumb-color="teal lighten-1"
+                thumb-label="always" track-fill-color="teal lighten-2" track-color="grey lighten-3"
+                class="align-center white--text">
                 <template #thumb-label="{ value }">{{ currency(value) }}</template>
             </v-range-slider>
         </div>
