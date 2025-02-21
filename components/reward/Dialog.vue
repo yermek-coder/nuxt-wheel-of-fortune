@@ -35,7 +35,7 @@ export default {
                 colors: ["#A267FF", "#1BBE6C", "#05BBDD", "#367BF2", "#FBD44D"],
                 zIndex: 201
             });
-        }, 300);
+        }, 200);
     }
 }
 </script>

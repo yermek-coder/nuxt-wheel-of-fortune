@@ -2,7 +2,7 @@ class RewardService {
     $modal;
 
     showRewardDialog(reward) {
-        return this.$modal({ component: "RewardDialog", props: { reward }, transition: "scale-transition", "content-class": "elevation-0 reward-collected-dialog-wrapper" })
+        return this.$modal({ component: "RewardDialog", props: { reward }, "content-class": "elevation-0 reward-collected-dialog-wrapper" })
     }
 }
 
