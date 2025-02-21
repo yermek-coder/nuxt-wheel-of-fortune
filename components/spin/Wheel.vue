@@ -25,16 +25,17 @@
         </div>
         <div class="multiplier urbanist-bold urbanist-white-shadow">x{{ spinsLeft }}</div>
         <div class="spins-left urbanist-extra-bold">{{ spinsLeftText }}</div>
-        <button @click="spinWheel" :disabled="!canSpin" class="spin-button urbanist-black">
+        <button @click.stop="spinWheel" :disabled="!canSpin" class="spin-button urbanist-black">
             Spin Now
         </button>
+
+        <RewardDialog v-model="showReward" :reward="reward" />
     </div>
 </template>
 
 <script>
 import Knob from "~/static/decorations/knob.svg?inline"
 import Pointer from "~/static/decorations/pointer.svg?inline"
-import rewardService from "~/services/reward";
 
 export default {
     components: { Knob, Pointer },
@@ -61,7 +62,9 @@ export default {
             isSpinning: false,
             spinTransition: '',
             spinsLeft: this.spinsAvailable,
-            winningIndex: null
+            winningIndex: null,
+            showReward: null,
+            reward: {}
         };
     },
     computed: {
@@ -165,7 +168,8 @@ export default {
                 this.winningIndex = selectedIndex;
                 this.drawWheel();
 
-                this.showRewardDialog(sections[selectedIndex]);
+                this.reward = sections[selectedIndex]
+                this.showReward = true;
             }, 5000);
         },
         getIcon(section) {

@@ -43,14 +43,14 @@
                             class="urbanist-extra-bold">{{ timerDate }}</span></div>
                     <div class="reward-screen-content-call urbanist-extra-bold">Tap to Collect</div>
                 </div>
+
+                <RewardDialog v-model="showReward" :reward="reward" />
             </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
-import rewardService from "~/services/reward";
-
 const MINUTE = 1000 * 60;
 const DAY = MINUTE * 60 * 24;
 
@@ -65,7 +65,9 @@ export default {
     data() {
         return {
             interval: null,
-            timerDate: "00 : 00 : 00"
+            timerDate: "00 : 00 : 00",
+            showReward: false,
+            reward: {}
         }
     },
     computed: {
@@ -101,7 +103,8 @@ export default {
         },
         collectReward(reward) {
             if (!reward.collected) {
-                rewardService.showRewardDialog(reward)
+                this.reward = reward;
+                this.showReward = true;
                 this.$emit("reward", reward)
             }
         },
