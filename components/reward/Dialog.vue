@@ -1,6 +1,6 @@
 <template>
-    <v-dialog :value="value" @input="$emit('input', $event)"
-        content-class="elevation-0 reward-collected-dialog-wrapper">
+    <v-dialog :value="value" @input="$emit('input', $event)" content-class="elevation-0 reward-collected-dialog-wrapper"
+        :transition="false">
         <div class="reward-collected-dialog d-flex flex-column align-center justify-center">
             <div>
                 <div class="reward-collected-dialog-body mb-6">
@@ -35,7 +35,7 @@ export default {
             if (this.value) {
                 setTimeout(() => {
                     confetti({
-                        particleCount: 20,
+                        particleCount: 40,
                         spread: 90,
                         origin: { y: 0.5, x: 0.5 },
                         startVelocity: 35,
