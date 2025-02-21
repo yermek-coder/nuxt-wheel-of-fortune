@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import rewardService from "~/services/reward";
+
 const MINUTE = 1000 * 60;
 const DAY = MINUTE * 60 * 24;
 
@@ -99,7 +101,7 @@ export default {
         },
         collectReward(reward) {
             if (!reward.collected) {
-                this.$modal({ component: "RewardDialog", props: { reward }, transition: "scale-transition", "content-class": "elevation-0 reward-collected-dialog-wrapper" })
+                rewardService.showRewardDialog(reward)
                 this.$emit("reward", reward)
             }
         },

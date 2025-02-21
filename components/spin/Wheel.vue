@@ -34,6 +34,7 @@
 <script>
 import Knob from "~/static/decorations/knob.svg?inline"
 import Pointer from "~/static/decorations/pointer.svg?inline"
+import rewardService from "~/services/reward";
 
 export default {
     components: { Knob, Pointer },
@@ -171,7 +172,7 @@ export default {
             return section.type === "coins" ? "/icons/coin.svg" : "/icons/gem.svg"
         },
         showRewardDialog(section) {
-            this.$modal({ component: "RewardDialog", props: { reward: section }, transition: "scale-transition", "content-class": "elevation-0 reward-collected-dialog-wrapper" })
+            rewardService.showRewardDialog(section)
             this.$emit("win", section)
         }
     },

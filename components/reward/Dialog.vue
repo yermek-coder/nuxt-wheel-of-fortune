@@ -26,17 +26,16 @@ export default {
         }
     },
     async mounted() {
-        await this.$nextTick()
-        window.requestAnimationFrame(() => {
+        setTimeout(() => {
             confetti({
-                particleCount: 50,
+                particleCount: 20,
                 spread: 90,
                 origin: { y: 0.5, x: 0.5 },
                 startVelocity: 35,
                 colors: ["#A267FF", "#1BBE6C", "#05BBDD", "#367BF2", "#FBD44D"],
                 zIndex: 201
             });
-        })
+        }, 300);
     }
 }
 </script>
