@@ -26,15 +26,25 @@
 
             <template v-else>
                 <template v-if="activeCategory">
-                    <div class="text-body-3 text--secondary mb-3">Properties for {{ activeCategory }} in
-                        Tanjung Tokong, Penang
+                    <div class="text-body-3 text--secondary mb-3">
+                        Properties for {{ activeCategory }} in Tanjung Tokong, Penang
                     </div>
-                    <PropertyFilters :filter="filters" node="subsales-properties" class="mb-1" />
+
+                    <div class="property-filters overflow-x-auto hide-scrollbar d-flex align-items-center gap-2">
+                        <div v-for="feature in features" :key="feature.component" :class="feature.classname">
+                            <v-chip @click="openFilters">
+                                {{ feature.title }}
+                                <v-icon class="ms-1">mdi-chevron-down</v-icon>
+                            </v-chip>
+                        </div>
+                    </div>
+
                     <PropertyCategories v-model="filters.category" class="mb-4" />
                     <div class="properties-list properties-list-single-col">
                         <PropertyCard v-for="(item, index) in properties" :key="index" :property="item" horizontal />
                     </div>
                 </template>
+
                 <template v-else>
                     <PropertyCategories v-model="filters.category" :categories="groupCategories" class="mb-4" />
                     <div class="properties-list properties-list-single-col gap-4">
@@ -45,9 +55,10 @@
                                 <PropertyCard v-for="(item, index) in properties.slice(0, 4)" :key="index"
                                     :property="item" horizontal />
                                 <div class="d-flex justify-center">
-                                    <v-btn :to="{ query: { category: category.title } }" class="align-self-center"
-                                        text>See
-                                        More<v-icon right>mdi-chevron-right</v-icon></v-btn>
+                                    <v-btn :to="{ query: { category: category.title } }" class="align-self-center" text>
+                                        See More
+                                        <v-icon right>mdi-chevron-right</v-icon>
+                                    </v-btn>
                                 </div>
                             </div>
                         </v-card>
@@ -59,7 +70,9 @@
 </template>
 
 <script>
-import propertyServices from "~/services/property"
+import propertyService from "~/services/property"
+import featureService from "~/services/feature"
+import { clone } from '~/util';
 
 export default {
     layout: "home",
@@ -70,7 +83,7 @@ export default {
     data() {
         return {
             filters: {},
-            properties: propertyServices.getProperties(),
+            properties: propertyService.getProperties(),
             categories: [
                 { amount: 200, title: 'Subsales' },
                 { amount: 10, title: 'New Projects' },
@@ -104,11 +117,19 @@ export default {
     computed: {
         activeCategory() {
             return this.$route.query?.category
+        },
+        features() {
+            return featureService.getFeatures("filter", { node: "property-filters-dialog", filters: clone(this.filters) })
         }
     },
     watch: {
         activeCategory() {
             window.scrollTo(0, 0);
+        }
+    },
+    methods: {
+        openFilters() {
+            propertyService.openSearchDialog(this.filters)
         }
     }
 }
