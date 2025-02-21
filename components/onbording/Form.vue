@@ -11,9 +11,11 @@
                         :close-on-content-click="false">
                         <template v-slot:activator="{ on, attrs, value }">
                             <div v-bind="attrs" v-on="on" class="d-flex align-center gap-2">
-                                <div class="onbording-form-phone-flag d-flex align-center" v-if="countryFlag"
-                                    v-html="countryFlag"></div>
-                                <span class="text--secondary">{{ selectedCountry.countryCode }}</span>
+                                <client-only>
+                                    <div class="onbording-form-phone-flag d-flex align-center" v-if="countryFlag"
+                                        v-html="countryFlag"></div>
+                                    <span class="text--secondary">{{ selectedCountry.countryCode }}</span>
+                                </client-only>
                                 <v-icon>mdi-chevron-down</v-icon>
                             </div>
                         </template>
@@ -58,13 +60,15 @@ export default {
             return this.countries.filter(item => !this.q.length || item.name.toLowerCase().includes(this.q.toLowerCase()))
         },
         countryFlag() {
-            if (this.selectedCountry?.code) {
+            if (process.client && this.selectedCountry?.code) {
                 return window.CountryFlagSvg[this.selectedCountry?.code]
             }
         }
     },
     mounted() {
-        this.countries = window.CountryList.getAll()
+        if (process.client) {
+            this.countries = window.CountryList.getAll()
+        }
     },
     methods: {
         submit() {
