@@ -25,7 +25,8 @@ export default {
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap' }
     ],
     script: [
-      { src: "/country-codes.js", defer: true, }
+      { src: "https://cdn.jsdelivr.net/npm/country-list-with-dial-code-and-flag@5.1.0/dist/main.min.js", defer: true, },
+      { src: "https://cdn.jsdelivr.net/npm/country-list-with-dial-code-and-flag/dist/country-flag-svg.js", defer: true, }
     ]
   },
 
